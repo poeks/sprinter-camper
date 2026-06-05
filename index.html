@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mercedes Sprinter Camper · gereviseerde motor · Victron solar · APK feb '27</title>
+<meta name="description" content="Rijklare camouflage-avontuurbus. Gereviseerde motor, verse APK tot feb 2027, Victron off-grid, alle facturen aanwezig. Vraagprijs € 9.750.">
+
+<!-- Open Graph: mooie preview als je de link in WhatsApp deelt -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mercedes Sprinter Camper — jouw uitvalsbasis voor elk avontuur">
+<meta property="og:description" content="Gereviseerde motor · Victron solar · verse APK tot feb '27 · alle facturen. € 9.750.">
+<meta property="og:image" content="media/hero-bergen.jpg">
+
+<style>
+  :root{
+    --sand:#f3ede1; --sand-2:#e9e0cf; --paper:#fbf7ef;
+    --olive:#3c4230; --olive-2:#525a3e; --moss:#6b7350;
+    --ink:#262219; --muted:#6f6757;
+    --amber:#c2703d; --amber-d:#a85a2c;
+    --line:#ddd2bd;
+    --shadow:0 14px 40px -18px rgba(38,34,25,.45);
+    --r:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--paper); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif; line-height:1.15; font-weight:700; letter-spacing:-.01em}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .eyebrow{font-family:-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.18em;
+    font-size:.72rem;font-weight:700;color:var(--moss)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;
+    color:#fff;overflow:hidden}
+  .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+  @media(min-width:821px){ .hero img.bg{object-position:center 70%} }
+  .hero::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(20,22,15,.15) 0%,rgba(20,22,15,.05) 38%,rgba(20,22,15,.78) 100%)}
+  .hero .inner{position:relative;z-index:2;padding:0 22px 46px;max-width:1080px;margin:0 auto;width:100%}
+  .hero .eyebrow{color:#e7dcc2}
+  .hero h1{font-size:clamp(2.1rem,6.5vw,4rem);margin:.35em 0 .25em;text-shadow:0 2px 24px rgba(0,0,0,.4);max-width:14ch}
+  .hero p.sub{font-size:clamp(.95rem,2.4vw,1.18rem);color:#f0e9da;max-width:46ch;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+  .price-chip{display:inline-flex;align-items:baseline;gap:.5ch;margin:18px 0 6px;
+    background:rgba(251,247,239,.95);color:var(--ink);padding:10px 18px;border-radius:999px;
+    font-weight:700;box-shadow:var(--shadow)}
+  .price-chip b{font-size:1.45rem}
+  .price-chip span{font-size:.8rem;color:var(--muted);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+  .btn{display:inline-flex;align-items:center;gap:.6ch;border:none;cursor:pointer;
+    font-size:1rem;font-weight:700;padding:14px 24px;border-radius:999px;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-wa{background:var(--amber);color:#fff;box-shadow:0 10px 26px -10px rgba(194,112,61,.9)}
+  .btn-wa:hover{background:var(--amber-d)}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.55);
+    backdrop-filter:blur(4px)}
+  .trust-strip{display:flex;flex-wrap:wrap;gap:18px;margin-top:24px;font-size:.9rem;
+    color:#f0e9da;font-weight:600}
+  .trust-strip span{display:inline-flex;align-items:center;gap:.5ch}
+  .trust-strip .ck{color:#bcd28a}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:74px 0}
+  .section-head{max-width:60ch}
+  .section-head h2{font-size:clamp(1.7rem,4.5vw,2.5rem);margin:.25em 0 .4em}
+  .section-head p{color:var(--muted);font-size:1.05rem}
+
+  .story{background:var(--olive);color:#f1ecdf}
+  .story .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center}
+  .story .eyebrow{color:#c4cda0}
+  .story h2{color:#fff;font-size:clamp(1.7rem,4.5vw,2.5rem)}
+  .story p.lead{font-size:1.16rem;margin-top:1em;color:#e7e1d2}
+  .story .photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .story .photos img{border-radius:12px;height:100%;object-fit:cover;box-shadow:var(--shadow)}
+  .story .photos img:first-child{grid-row:span 2;height:100%}
+
+  /* gallery */
+  .gallery{columns:3;column-gap:14px}
+  .gallery figure{break-inside:avoid;margin:0 0 14px;border-radius:12px;overflow:hidden;
+    cursor:zoom-in;box-shadow:0 8px 22px -14px rgba(38,34,25,.5);background:var(--sand-2)}
+  .gallery img{width:100%;transition:transform .4s ease}
+  .gallery figure:hover img{transform:scale(1.04)}
+  .gallery figcaption{font-size:.8rem;color:var(--muted);padding:8px 12px;background:var(--paper)}
+
+  /* specs */
+  .specs{background:var(--sand)}
+  .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:8px}
+  .spec-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+    padding:26px 28px;box-shadow:var(--shadow)}
+  .spec-card h3{font-size:1.15rem;margin-bottom:14px;display:flex;align-items:center;gap:.5ch}
+  .spec-card dl{display:grid;grid-template-columns:auto 1fr;gap:9px 16px;font-size:.96rem}
+  .spec-card dt{color:var(--muted)}
+  .spec-card dd{text-align:right;font-weight:600}
+  .spec-card ul{list-style:none;font-size:.96rem}
+  .spec-card ul li{padding:6px 0;border-bottom:1px dashed var(--line);display:flex;gap:.6ch}
+  .spec-card ul li:last-child{border:none}
+  .spec-card ul li::before{content:"▸";color:var(--moss);font-weight:700}
+
+  /* off-grid */
+  .offgrid .feat{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+  .offgrid .feat div{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+    padding:22px;text-align:center;box-shadow:var(--shadow)}
+  .offgrid .feat .big{font-family:Georgia,serif;font-size:1.9rem;font-weight:700;color:var(--olive)}
+  .offgrid .feat small{color:var(--muted);font-size:.85rem;display:block;margin-top:4px}
+
+  /* maintenance timeline */
+  .maint{background:var(--olive-2);color:#f1ecdf}
+  .maint .eyebrow{color:#c4cda0}
+  .maint h2{color:#fff}
+  .badges{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 34px}
+  .badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);
+    padding:9px 16px;border-radius:999px;font-size:.88rem;font-weight:600;display:inline-flex;gap:.5ch}
+  .badge .ck{color:#bcd28a}
+  .timeline{border-left:2px solid rgba(255,255,255,.28);margin-left:8px;padding-left:26px}
+  .timeline .item{position:relative;padding:0 0 26px}
+  .timeline .item::before{content:"";position:absolute;left:-33px;top:5px;width:13px;height:13px;
+    border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px var(--olive-2)}
+  .timeline .item .yr{font-weight:700;color:#fff}
+  .timeline .item p{color:#ddd6c5;font-size:.96rem}
+
+  /* honest */
+  .honest .note{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--moss);
+    border-radius:var(--r);padding:26px 30px;box-shadow:var(--shadow);max-width:74ch}
+  .honest ul{margin:14px 0 0 0;padding-left:20px}
+  .honest li{margin:7px 0}
+  .honest .tag{display:inline-block;background:var(--sand-2);color:var(--olive);font-size:.78rem;
+    font-weight:700;padding:3px 10px;border-radius:6px;margin-bottom:14px;text-transform:uppercase;letter-spacing:.08em}
+
+  /* dossier */
+  .dossier{background:var(--sand)}
+  .dossier .box{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+    padding:30px;box-shadow:var(--shadow);max-width:70ch}
+  .dossier .box ul{list-style:none;margin-top:14px}
+  .dossier .box li{padding:7px 0;display:flex;gap:.7ch}
+  .dossier .box li::before{content:"📄";font-size:.95rem}
+
+  /* final cta */
+  .final{background:var(--olive);color:#fff;text-align:center}
+  .final h2{color:#fff;font-size:clamp(1.8rem,5vw,2.7rem)}
+  .final p{color:#e3ddce;max-width:48ch;margin:14px auto 0}
+  .final .cta-row{justify-content:center}
+  .final .where{margin-top:22px;font-size:.92rem;color:#c8c2b1}
+
+  footer{background:var(--ink);color:#b8b0a0;text-align:center;padding:30px 22px;font-size:.82rem}
+
+  /* sticky mobile CTA */
+  .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(251,247,239,0),var(--paper) 40%)}
+  .sticky-cta a{display:flex;justify-content:center}
+
+  /* lightbox */
+  .lb{position:fixed;inset:0;z-index:90;background:rgba(20,18,12,.92);display:none;
+    align-items:center;justify-content:center;cursor:zoom-out;padding:20px}
+  .lb.open{display:flex}
+  .lb img{max-width:95vw;max-height:92vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .lb .close{position:absolute;top:16px;right:20px;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+
+  @media(max-width:820px){
+    .story .grid{grid-template-columns:1fr;gap:26px}
+    .gallery{columns:2}
+    .spec-grid{grid-template-columns:1fr}
+    .offgrid .feat{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){
+    section{padding:54px 0}
+    .gallery{columns:1}
+    .hero .inner{padding-bottom:38px}
+    .sticky-cta{display:block}
+    .hero{min-height:92svh}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <img class="bg" src="media/hero-bergen.jpg" alt="Mercedes Sprinter camper in camouflagekleur voor besneeuwde bergen">
+  <div class="inner">
+    <span class="eyebrow">Mercedes Sprinter Camper · 2002</span>
+    <h1>Jouw uitvalsbasis voor elk avontuur</h1>
+    <p class="sub">Gereviseerde motor · Victron off-grid solar · verse APK tot feb&nbsp;2027. Instappen en wegrijden — waar en wanneer je wilt.</p>
+    <div>
+      <span class="price-chip"><b>€&nbsp;9.750</b> <span>redelijk bod bespreekbaar</span></span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-wa" href="https://wa.me/31623191656?text=Hoi%20Roel%2C%20ik%20zag%20je%20advertentie%20van%20de%20Mercedes%20Sprinter%20camper%20en%20wil%20graag%20een%20bezichtiging%20inplannen." target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.041zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        Plan een bezichtiging
+      </a>
+      <a class="btn btn-ghost" href="#galerij">Bekijk de bus</a>
+    </div>
+    <div class="trust-strip">
+      <span><span class="ck">✓</span> Geen schadehistorie</span>
+      <span><span class="ck">✓</span> Verse APK tot feb '27</span>
+      <span><span class="ck">✓</span> Alle facturen aanwezig</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== VERHAAL ===================== -->
+<section class="story">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <span class="eyebrow">Een avond in de bus</span>
+        <h2>Geen camping, geen buren — alleen het veld waar je stopte</h2>
+        <p class="lead">Het is net licht als je wakker wordt. Je draait de dieselkachel een tikje hoger en binnen een paar minuten is het warm. Koffie op het pitje, de zon laadt de accu's alweer op via de panelen op het dak. Geen stekker nodig, geen haast. Je schuift de deur open naar een ochtend die helemaal van jou is.</p>
+        <p class="lead">Dit is geen opgepoetste schuurvondst. Het hart van deze Sprinter — het motorblok — is gereviseerd, en er is de afgelopen jaren <strong>ruim € 15.000 aan onderhoud</strong> in gegaan, mét facturen. Verse APK, nieuwe banden, nieuwe remleidingen. Je stapt in en rijdt weg.</p>
+      </div>
+      <div class="photos">
+        <img src="media/sfeer-schemering-1.jpg" alt="Bus in het bos bij schemering met warme gloed van binnen" loading="lazy">
+        <img src="media/sfeer-schemering-2.jpg" alt="Kampeerplek in het bos bij avondlicht" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALERIJ ===================== -->
+<section id="galerij">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">In beeld</span>
+      <h2>Dit is wat je koopt</h2>
+      <p>De stoere camouflagelak zie je op geen enkele festivalweide over het hoofd. Klik voor groot.</p>
+    </div>
+    <div class="gallery" style="margin-top:34px">
+      <figure><img src="media/ext-zijkant.jpg" alt="Zijaanzicht camouflage Sprinter" loading="lazy"><figcaption>Volledig camouflage — zijaanzicht</figcaption></figure>
+      <figure><img src="media/ext-voor-keukenraam.jpg" alt="Voorkant met keukenraam" loading="lazy"><figcaption>Voorzijde met keukenraam</figcaption></figure>
+      <figure><img src="media/ext-achter.jpg" alt="Achterkant met achterdeuren" loading="lazy"><figcaption>Achterzijde met dubbele deuren</figcaption></figure>
+      <figure><img src="media/ext-voorschuin.jpg" alt="Voorkant schuin, Mercedes-ster" loading="lazy"><figcaption>Mercedes-ster voorop</figcaption></figure>
+      <figure><img src="media/sfeer-schemering-1.jpg" alt="Boskamp bij schemering" loading="lazy"><figcaption>Off-grid in het bos</figcaption></figure>
+      <figure><img src="media/hero-bergen.jpg" alt="Bus voor de bergen" loading="lazy"><figcaption>Onderweg in de bergen</figcaption></figure>
+    </div>
+    <p style="color:var(--muted);font-size:.86rem;margin-top:8px">Meer foto's (interieur, keuken, motor, banden) bij bezichtiging en in het dossier.</p>
+  </div>
+</section>
+
+<!-- ===================== SPECS ===================== -->
+<section class="specs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">In één oogopslag</span>
+      <h2>De specificaties</h2>
+    </div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <h3>🔧 Techniek</h3>
+        <dl>
+          <dt>Merk / type</dt><dd>Mercedes Sprinter 903.6</dd>
+          <dt>Bouwjaar</dt><dd>2002</dd>
+          <dt>Motor</dt><dd>2.148 cc · 95 kW / 129 pk</dd>
+          <dt>Brandstof</dt><dd>Diesel · Euro 3</dd>
+          <dt>Transmissie</dt><dd>Automaat · achterwiel</dd>
+          <dt>Km-stand</dt><dd>367.718 (juni '26)</dd>
+          <dt>Verbruik</dt><dd>ca. 1 op 11,5</dd>
+          <dt>APK</dt><dd>tot 20-02-2027</dd>
+          <dt>Schadehistorie</dt><dd>geen (RDW)</dd>
+        </dl>
+      </div>
+      <div class="spec-card">
+        <h3>🏕️ Camperinrichting</h3>
+        <ul>
+          <li>Slaapplaats 200×80 cm — lattenbodem uitschuifbaar naar volwaardig tweepersoons (twee matrassen aanwezig)</li>
+          <li>Sta-hoogte geschikt tot 1.86 m+</li>
+          <li>Keuken: gaskookplaat op gasfles (6,7 kg, '23, π-gekeurd), koelkast, watertank met 12V-pomp en kraan</li>
+          <li>VEVOR dieselstandkachel 8 kW — LCD, afstandsbediening én app</li>
+          <li>Dakraam, raamroosters voor, 12V-ventilator</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OFF-GRID ===================== -->
+<section class="offgrid">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Het kloppend hart</span>
+      <h2>Off-grid op zonne-energie — Victron</h2>
+      <p>Een dag stroom zonder camping. Compleet Victron-systeem, klaar voor autonoom kamperen.</p>
+    </div>
+    <div class="feat">
+      <div><span class="big">230 W</span><small>2× BlueSolar zonnepaneel</small></div>
+      <div><span class="big">MPPT</span><small>SmartSolar 100/30 laadregelaar</small></div>
+      <div><span class="big">2 + 1</span><small>huishoudaccu's + startaccu</small></div>
+      <div><span class="big">230 V</span><small>omvormer (Bluetooth) + walstroom</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ONDERHOUD ===================== -->
+<section class="maint">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Vertrouwen</span>
+      <h2>Ruim € 15.000 aan onderhoud — mét facturen</h2>
+    </div>
+    <div class="badges">
+      <span class="badge"><span class="ck">✓</span> Alle facturen aanwezig</span>
+      <span class="badge"><span class="ck">✓</span> Getaxeerd op € 10.000</span>
+      <span class="badge"><span class="ck">✓</span> Geen schadehistorie (RDW)</span>
+    </div>
+    <div class="timeline">
+      <div class="item"><span class="yr">Revisie (vorige eigenaar)</span><p>Motorblok gereviseerd · nieuwe turbo, verstuivers, brandstoflijnen, versnellingsbakpomp — ruim € 11.000.</p></div>
+      <div class="item"><span class="yr">Aug 2024</span><p>Nieuwe dynamo (ANWB).</p></div>
+      <div class="item"><span class="yr">Feb 2025</span><p>Grote beurt · nieuwe distributieriem · hogedrukpomp + leidingen.</p></div>
+      <div class="item"><span class="yr">Feb 2026 — BOVAG</span><p>Grote beurt + APK · 2× nieuwe banden Toyo Open Country · nieuwe remleidingen · laswerk · alle filters + remvloeistof.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOSSIER ===================== -->
+<section class="dossier">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Compleet gedocumenteerd</span>
+      <h2>Je krijgt het hele dossier mee</h2>
+      <p>Geen kat in de zak. Alles gaat digitaal met de bus mee:</p>
+    </div>
+    <div class="box" style="margin-top:24px">
+      <ul>
+        <li>Alle onderhouds- en reparatiefacturen</li>
+        <li>Taxatierapport (vervangingswaarde € 10.000)</li>
+        <li>Volledige onderhoudshistorie</li>
+        <li>Kant-en-klare kostenberekening: gemeten verbruik + kosten per km</li>
+      </ul>
+      <p style="margin-top:16px;color:var(--muted)">Overzichtelijk en compleet — je kunt het zelfs zo in je eigen AI/ChatGPT gooien om alles na te rekenen vóór je beslist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EERLIJK ===================== -->
+<section class="honest">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Geen verrassingen</span>
+      <h2>Eerlijk over de staat</h2>
+    </div>
+    <div class="note" style="margin-top:22px">
+      <span class="tag">Een echte avontuurbus, geen showroommodel</span>
+      <p>Een 24 jaar oude bus heeft een paar kleine punten — allemaal benoemd zodat je niet voor verrassingen komt te staan:</p>
+      <ul>
+        <li>Waterkraantje werkt niet — eenvoudig zelf te vervangen (~€30)</li>
+        <li>Enkele verlichtingsdetails (kenteken-LED, reflectoren) mogen nog gefixt</li>
+        <li>Slot bestuurdersdeur sluit af en toe niet in één keer (meestal prima — kwestie van afstellen)</li>
+        <li>Schuif (deurvanger) van de rechter achterdeur is kapot</li>
+        <li>Groot zijraam bij de keuken kan niet open</li>
+      </ul>
+      <p style="margin-top:14px">Niets dat het rijden of kamperen in de weg zit. <strong>Let op:</strong> de motor is Euro 3 — daarmee kom je de milieuzones van de grote steden (o.a. Amsterdam, Utrecht) niet meer in. Voor kamperen en reizen buiten de stadskernen maakt dat niets uit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WAAROM TE KOOP ===================== -->
+<section class="specs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Geen verborgen reden</span>
+      <h2>Waarom te koop?</h2>
+    </div>
+    <div class="box" style="background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--amber);border-radius:var(--r);padding:26px 30px;box-shadow:var(--shadow);max-width:74ch;margin-top:22px">
+      <p style="font-size:1.08rem">Deze bus heeft een tijd als mijn huis gediend — ik heb er echt in geleefd, en dat merk je aan hoe compleet en doorleefd hij is ingericht. Inmiddels heb ik een vaste woonplek, en dan is het financieel simpelweg niet meer houdbaar om de bus aan te houden.</p>
+      <p style="margin-top:12px;color:var(--muted)">Geen verborgen reden, geen haast door gebreken — puur een nieuwe levensfase. Hij verdient een nieuwe eigenaar die er weer op uit trekt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="final" id="contact">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#c4cda0">Wil je deze zomer al op pad?</span>
+    <h2>Kom een keer kijken</h2>
+    <p>Facturen en taxatierapport zijn bij bezichtiging in te zien. Stuur gerust een appje — dan plannen we een moment.</p>
+    <div class="cta-row" style="margin-top:24px">
+      <a class="btn btn-wa" href="https://wa.me/31623191656?text=Hoi%20Roel%2C%20ik%20zag%20je%20advertentie%20van%20de%20Mercedes%20Sprinter%20camper%20en%20wil%20graag%20een%20bezichtiging%20inplannen." target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.041zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        App via WhatsApp
+      </a>
+      <a class="btn btn-ghost" href="tel:+31623191656">Bel 06 23191656</a>
+    </div>
+    <p class="where">📍 Bezichtigen in omgeving Amersfoort</p>
+  </div>
+</section>
+
+<footer>
+  Mercedes-Benz Sprinter 903.6 · 2002 · kenteken 82-RFZ-7 · particuliere verkoop
+</footer>
+
+<!-- sticky mobile CTA -->
+<div class="sticky-cta">
+  <a class="btn btn-wa" style="width:100%;justify-content:center" href="https://wa.me/31623191656?text=Hoi%20Roel%2C%20ik%20zag%20je%20advertentie%20van%20de%20Mercedes%20Sprinter%20camper%20en%20wil%20graag%20een%20bezichtiging%20inplannen." target="_blank" rel="noopener">Plan een bezichtiging via WhatsApp</a>
+</div>
+
+<!-- lightbox -->
+<div class="lb" id="lb"><span class="close">&times;</span><img src="" alt=""></div>
+<script>
+  (function(){
+    var lb=document.getElementById('lb'), lbImg=lb.querySelector('img');
+    document.querySelectorAll('.gallery figure img').forEach(function(img){
+      img.addEventListener('click',function(){lbImg.src=img.src;lbImg.alt=img.alt;lb.classList.add('open');});
+    });
+    lb.addEventListener('click',function(){lb.classList.remove('open');});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});
+  })();
+</script>
+</body>
+</html>

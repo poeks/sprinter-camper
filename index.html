@@ -150,6 +150,27 @@
 
   footer{background:var(--ink);color:#b8b0a0;text-align:center;padding:30px 22px;font-size:.82rem}
 
+  /* video (Vimeo, portret 9:16) */
+  .video{background:var(--olive-2);color:#f1ecdf}
+  .video .eyebrow{color:#c4cda0}
+  .video h2{color:#fff}
+  .video .cap{font-size:.9rem;color:#ddd6c5;text-align:center;margin-top:12px}
+  .vplayer{position:relative;margin:26px auto 0;width:100%;max-width:400px;aspect-ratio:9/16;
+    border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);background:#000}
+  .vplayer iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  /* motor video als compacte kaart in de specs-sectie */
+  .motorcard{display:grid;grid-template-columns:1fr;gap:24px;align-items:center;justify-items:center;
+    background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--amber);
+    border-radius:var(--r);padding:28px;box-shadow:var(--shadow);margin-top:34px;text-align:center}
+  .motorcard h3{font-size:1.2rem;margin-bottom:8px}
+  .motorcard p{color:var(--muted);font-size:.98rem;max-width:52ch;margin:0 auto}
+  .motorcard .vplayer{max-width:340px;margin:6px auto 0}
+  @media(min-width:760px){
+    .motorcard{grid-template-columns:1.1fr .9fr;text-align:left;justify-items:start}
+    .motorcard p{margin:0}
+    .motorcard .vplayer{margin:0}
+  }
+
   /* sticky mobile CTA */
   .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;
     padding:12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -223,6 +244,23 @@
   </div>
 </section>
 
+<!-- ===================== VIDEO: RONDLEIDING ===================== -->
+<section class="video">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto;text-align:center">
+      <span class="eyebrow">Stap virtueel in</span>
+      <h2>Rondleiding door de bus</h2>
+      <p style="color:#ddd6c5;margin:0 auto">Een rondje rond en door de bus — alles wat erin zit, met uitleg. Zo zie je 'm het beste vóór je langskomt.</p>
+    </div>
+    <div class="vplayer">
+      <iframe src="https://player.vimeo.com/video/1198891467?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
+        loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen
+        title="Rondleiding camperbus"></iframe>
+    </div>
+    <p class="cap">Tip: zet het geluid aan 🔊</p>
+  </div>
+</section>
+
 <!-- ===================== GALERIJ ===================== -->
 <section id="galerij">
   <div class="wrap">
@@ -232,14 +270,20 @@
       <p>De stoere camouflagelak zie je op geen enkele festivalweide over het hoofd. Klik voor groot.</p>
     </div>
     <div class="gallery" style="margin-top:34px">
-      <figure><img src="media/ext-zijkant.jpg" alt="Zijaanzicht camouflage Sprinter" loading="lazy"><figcaption>Volledig camouflage — zijaanzicht</figcaption></figure>
-      <figure><img src="media/ext-voor-keukenraam.jpg" alt="Voorkant met keukenraam" loading="lazy"><figcaption>Voorzijde met keukenraam</figcaption></figure>
-      <figure><img src="media/ext-achter.jpg" alt="Achterkant met achterdeuren" loading="lazy"><figcaption>Achterzijde met dubbele deuren</figcaption></figure>
-      <figure><img src="media/ext-voorschuin.jpg" alt="Voorkant schuin, Mercedes-ster" loading="lazy"><figcaption>Mercedes-ster voorop</figcaption></figure>
+      <figure><img src="media/ext-front-l.jpg" alt="Camouflage Sprinter voor-schuin aan de bosrand" loading="lazy"><figcaption>Aan de bosrand — voor-schuin</figcaption></figure>
+      <figure><img src="media/int-bed.jpg" alt="Slaapplaats met matrassen" loading="lazy"><figcaption>Slaapplaats — uitschuifbaar naar 2-persoons</figcaption></figure>
+      <figure><img src="media/ext-side.jpg" alt="Zijaanzicht volledig camouflage" loading="lazy"><figcaption>Volledig camouflage — zijaanzicht</figcaption></figure>
+      <figure><img src="media/int-keuken.jpg" alt="Keuken met gaskookplaat en spoelbak" loading="lazy"><figcaption>Keuken: gaskookplaat + spoelbak</figcaption></figure>
+      <figure><img src="media/ext-front-r.jpg" alt="Voor-schuin rechts aan de bosrand" loading="lazy"><figcaption>Voor-schuin rechts</figcaption></figure>
+      <figure><img src="media/int-dashboard.jpg" alt="Dashboard en stuur" loading="lazy"><figcaption>Dashboard + tellerstand</figcaption></figure>
+      <figure><img src="media/ext-rear-q.jpg" alt="Achter-schuin met dubbele deuren" loading="lazy"><figcaption>Achterzijde met dubbele deuren</figcaption></figure>
+      <figure><img src="media/int-achterdeuren.jpg" alt="Achterdeuren open, zicht naar binnen" loading="lazy"><figcaption>Achterin — deuren wijd open</figcaption></figure>
+      <figure><img src="media/int-opberg.jpg" alt="Opbergruimte met kastjes" loading="lazy"><figcaption>Ruime opberg onder de keuken</figcaption></figure>
+      <figure><img src="media/ext-side-l.jpg" alt="Zijaanzicht links" loading="lazy"><figcaption>Klaar voor vertrek</figcaption></figure>
       <figure><img src="media/sfeer-schemering-1.jpg" alt="Boskamp bij schemering" loading="lazy"><figcaption>Off-grid in het bos</figcaption></figure>
       <figure><img src="media/hero-bergen.jpg" alt="Bus voor de bergen" loading="lazy"><figcaption>Onderweg in de bergen</figcaption></figure>
     </div>
-    <p style="color:var(--muted);font-size:.86rem;margin-top:8px">Meer foto's (interieur, keuken, motor, banden) bij bezichtiging en in het dossier.</p>
+    <p style="color:var(--muted);font-size:.86rem;margin-top:8px">Foto's van vanavond aan de bosrand. Meer details bij bezichtiging en in het dossier.</p>
   </div>
 </section>
 
@@ -273,7 +317,21 @@
           <li>Keuken: gaskookplaat op gasfles (6,7 kg, '23, π-gekeurd), koelkast, watertank met 12V-pomp en kraan</li>
           <li>VEVOR dieselstandkachel 8 kW — LCD, afstandsbediening én app</li>
           <li>Dakraam, raamroosters voor, 12V-ventilator</li>
+          <li>Achteruitrijcamera met monitor in de binnenspiegel — fijn bij zo'n lange bus</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="motorcard">
+      <div>
+        <span class="eyebrow" style="color:var(--moss)">Hoor 'm zelf</span>
+        <h3>Een 24 jaar oude diesel? Luister maar.</h3>
+        <p>Geen verhalen — ik start de bus en rij een stukje, zodat je de gereviseerde motor gewoon kunt horen draaien.</p>
+      </div>
+      <div class="vplayer">
+        <iframe src="https://player.vimeo.com/video/1198891036?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
+          loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen
+          title="Motor starten en rijden"></iframe>
       </div>
     </div>
   </div>
@@ -353,9 +411,19 @@
         <li>Slot bestuurdersdeur sluit af en toe niet in één keer (meestal prima — kwestie van afstellen)</li>
         <li>Schuif (deurvanger) van de rechter achterdeur is kapot</li>
         <li>Groot zijraam bij de keuken kan niet open</li>
+        <li>Wat roest aan de onderranden (o.a. achter) en een krasje in de lak — passend bij de leeftijd</li>
+        <li>Koplampen zijn wat dof/verweerd</li>
       </ul>
       <p style="margin-top:14px">Niets dat het rijden of kamperen in de weg zit. <strong>Let op:</strong> de motor is Euro 3 — daarmee kom je de milieuzones van de grote steden (o.a. Amsterdam, Utrecht) niet meer in. Voor kamperen en reizen buiten de stadskernen maakt dat niets uit.</p>
     </div>
+
+    <div class="gallery" style="columns:4;margin-top:24px;max-width:74ch">
+      <figure><img src="media/staat-kras.jpg" alt="Krasje in de lak op de zijkant" loading="lazy"><figcaption>Krasje in de lak</figcaption></figure>
+      <figure><img src="media/staat-roest.jpg" alt="Wat roest aan de onderrand achter" loading="lazy"><figcaption>Roest onderrand achter</figcaption></figure>
+      <figure><img src="media/staat-slot.jpg" alt="Slot van de bestuurdersdeur" loading="lazy"><figcaption>Slot bestuurdersdeur</figcaption></figure>
+      <figure><img src="media/staat-koplamp.jpg" alt="Wat doffe koplamp" loading="lazy"><figcaption>Koplamp wat dof</figcaption></figure>
+    </div>
+    <p style="color:var(--muted);font-size:.82rem;margin-top:6px;max-width:74ch">We laten 'm bewust zien zoals 'ie is.</p>
   </div>
 </section>
 

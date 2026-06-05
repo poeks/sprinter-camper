@@ -183,6 +183,21 @@
     .motorcard .vplayer{margin:0}
   }
 
+  /* het echte leven (vakantiefoto's) */
+  .leven{background:var(--olive);color:#f1ecdf}
+  .leven .eyebrow{color:#c4cda0}
+  .leven h2{color:#fff}
+  .leven .section-head p{color:#ddd6c5}
+  .leven figure{margin:0}
+  .leven figcaption{font-size:.84rem;color:#cdd0bb;padding:9px 4px 0}
+  .leven .feature{margin-top:30px}
+  .leven .feature img{width:100%;max-height:440px;object-fit:cover;object-position:center 60%;
+    border-radius:14px;box-shadow:var(--shadow);cursor:zoom-in}
+  .leven .pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  .leven .pair img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;
+    box-shadow:var(--shadow);cursor:zoom-in}
+  @media(max-width:620px){ .leven .pair{grid-template-columns:1fr} }
+
   /* sticky mobile CTA */
   .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;
     padding:12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -219,7 +234,7 @@
   <div class="inner">
     <span class="eyebrow">Te koop · Mercedes Sprinter Camper · 2002</span>
     <h1>Je huis op wielen, klaar om de bergen in te rijden</h1>
-    <p class="sub">Instappen, de kachel aan, en rijden — geen camping nodig. Gereviseerde motor, Victron-solar en verse APK tot feb&nbsp;2027.</p>
+    <p class="sub">Hierin slaap je waar je wilt, zonder camping of reserveren vooraf. Gereviseerde motor, Victron-solar en verse APK tot feb&nbsp;2027.</p>
     <div>
       <span class="price-chip"><b>€&nbsp;8.950</b> <span>redelijk bod bespreekbaar</span></span>
       <p style="font-size:.82rem;color:#e7dcc2;margin-top:8px;max-width:44ch;text-shadow:0 1px 10px rgba(0,0,0,.55)">Onderbouwd met taxatie (€&nbsp;10.000) en ruim € 15.000 aan facturen.</p>
@@ -297,6 +312,31 @@
       <figure><img src="media/hero-bergen.jpg" alt="Bus voor de bergen" loading="lazy"><figcaption>Onderweg in de bergen</figcaption></figure>
     </div>
     <p style="color:var(--muted);font-size:.86rem;margin-top:8px">Foto's van vanavond aan de bosrand. Meer details bij bezichtiging en in het dossier.</p>
+  </div>
+</section>
+
+<!-- ===================== HET ECHTE LEVEN ===================== -->
+<section class="leven">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Hoe het echt was</span>
+      <h2>Onderweg met deze bus</h2>
+      <p>Geen verkooppraatjes, gewoon hoe het was om ermee weg te gaan. Klik voor groot.</p>
+    </div>
+    <figure class="feature">
+      <img src="media/vakantie_keuken.jpg" alt="Koken in de bus met uitzicht op een bergweide en gebedsvlaggetjes voor het raam" loading="lazy">
+      <figcaption>Koken met uitzicht — gebedsvlaggetjes voor het raam, bergweide erachter</figcaption>
+    </figure>
+    <div class="pair">
+      <figure>
+        <img src="media/vakantie_berg.jpg" alt="De camper aan een bergweg in de Aosta met besneeuwde toppen" loading="lazy">
+        <figcaption>Wildkamperen in de bergen van de Aosta</figcaption>
+      </figure>
+      <figure>
+        <img src="media/vakantie_parkeren.jpg" alt="De bus geparkeerd langs een bosweg, even stilstaan onderweg" loading="lazy">
+        <figcaption>Even stilstaan waar het mooi is</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -489,7 +529,7 @@
 <script>
   (function(){
     var lb=document.getElementById('lb'), lbImg=lb.querySelector('img');
-    document.querySelectorAll('.gallery figure img, .staat-shots figure img').forEach(function(img){
+    document.querySelectorAll('.gallery figure img, .staat-shots figure img, .leven figure img').forEach(function(img){
       img.addEventListener('click',function(){lbImg.src=img.src;lbImg.alt=img.alt;lb.classList.add('open');});
     });
     lb.addEventListener('click',function(){lb.classList.remove('open');});

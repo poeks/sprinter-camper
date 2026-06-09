@@ -20,15 +20,10 @@
     opacity: 0; transition: opacity .6s ease; white-space: nowrap;
   }
   .hint.show { opacity: 1; }
-  .badge {
-    position: absolute; top: 20px; left: 20px; pointer-events: none; user-select: none;
-  }
+  .badge { position: absolute; top: 20px; left: 20px; pointer-events: none; user-select: none; }
   .badge b { display: block; font-size: 17px; color: #2b3326; letter-spacing: .01em; }
   .badge span { font-size: 12px; color: #5d6b50; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; }
-  .loading {
-    position: absolute; inset: 0; display: grid; place-items: center;
-    font-size: 14px; color: #5d6b50; font-weight: 600; letter-spacing: .04em;
-  }
+  .loading { position: absolute; inset: 0; display: grid; place-items: center; font-size: 14px; color: #5d6b50; font-weight: 600; letter-spacing: .04em; }
 </style>
 </head>
 <body>
@@ -66,16 +61,16 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 // ---- Scene & camera ----
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-camera.position.set(7.2, 4.2, 8.4);
+const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+camera.position.set(8.5, 4.4, 9.5);
 
 const controls = new OrbitControls(camera, canvas);
 controls.target.set(0, 1.35, 0);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
 controls.enablePan = false;
-controls.minDistance = 6;
-controls.maxDistance = 18;
+controls.minDistance = 7;
+controls.maxDistance = 24;
 controls.minPolarAngle = 0.25;
 controls.maxPolarAngle = Math.PI / 2 - 0.04;
 controls.autoRotate = true;
@@ -83,31 +78,22 @@ controls.autoRotateSpeed = 0.9;
 controls.addEventListener('start', () => { controls.autoRotate = false; });
 
 // ---- Lights ----
-const hemi = new THREE.HemisphereLight(0xeaf4ff, 0x8a7f5e, 0.85);
-scene.add(hemi);
-
+scene.add(new THREE.HemisphereLight(0xeaf4ff, 0x8a7f5e, 0.85));
 const key = new THREE.DirectionalLight(0xfff3da, 2.1);
-key.position.set(6, 9, 5);
+key.position.set(6, 10, 6);
 key.castShadow = true;
 key.shadow.mapSize.set(2048, 2048);
-key.shadow.camera.near = 1;
-key.shadow.camera.far = 40;
-key.shadow.camera.left = -9;
-key.shadow.camera.right = 9;
-key.shadow.camera.top = 9;
-key.shadow.camera.bottom = -9;
+key.shadow.camera.near = 1; key.shadow.camera.far = 45;
+key.shadow.camera.left = -11; key.shadow.camera.right = 11;
+key.shadow.camera.top = 11; key.shadow.camera.bottom = -11;
 key.shadow.bias = -0.0004;
 scene.add(key);
-
 const fill = new THREE.DirectionalLight(0xbfd8ff, 0.5);
 fill.position.set(-7, 4, -4);
 scene.add(fill);
 
 // ---- Ground shadow catcher ----
-const ground = new THREE.Mesh(
-  new THREE.PlaneGeometry(60, 60),
-  new THREE.ShadowMaterial({ opacity: 0.26 })
-);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), new THREE.ShadowMaterial({ opacity: 0.26 }));
 ground.rotation.x = -Math.PI / 2;
 ground.receiveShadow = true;
 scene.add(ground);
@@ -117,12 +103,12 @@ function makeCamoTexture() {
   const c = document.createElement('canvas');
   c.width = c.height = 512;
   const ctx = c.getContext('2d');
-  ctx.fillStyle = '#b9a96d';                       // zandkleurige basis
+  ctx.fillStyle = '#c9bd8f';                                  // zand/cream basis
   ctx.fillRect(0, 0, 512, 512);
-  const cols = ['#717b46', '#4e5734', '#7d6b4d', '#2c2b23']; // olijf, donkergroen, bruin, bijna-zwart
-  for (let i = 0; i < 64; i++) {
+  const cols = ['#717645', '#5c5238', '#3f4a2f', '#8a7c55'];  // olijf, bruin, donkergroen, lichtzand
+  for (let i = 0; i < 50; i++) {
     ctx.fillStyle = cols[(Math.random() * cols.length) | 0];
-    blob(ctx, Math.random() * 512, Math.random() * 512, 28 + Math.random() * 72);
+    blob(ctx, Math.random() * 512, Math.random() * 512, 40 + Math.random() * 80);
   }
   const t = new THREE.CanvasTexture(c);
   t.wrapS = t.wrapT = THREE.RepeatWrapping;
@@ -135,36 +121,66 @@ function blob(ctx, x, y, r) {
   for (let i = 0; i <= pts; i++) {
     const a = (i / pts) * Math.PI * 2;
     const rr = r * (0.6 + Math.random() * 0.6);
-    const px = x + Math.cos(a) * rr;
-    const py = y + Math.sin(a) * rr;
+    const px = x + Math.cos(a) * rr, py = y + Math.sin(a) * rr;
     i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
   }
   ctx.closePath();
   ctx.fill();
 }
 const camoTex = makeCamoTexture();
-function camoMat(rx = 1, ry = 1) {
+function camoMat(rep = 0.32) {
   const t = camoTex.clone();
   t.needsUpdate = true;
   t.wrapS = t.wrapT = THREE.RepeatWrapping;
-  t.repeat.set(rx, ry);
+  t.repeat.set(rep, rep);
   t.offset.set(Math.random(), Math.random());
   return new THREE.MeshStandardMaterial({ map: t, roughness: 0.92, metalness: 0.04 });
 }
 
-// ---- Shared materials ----
-const glassMat = new THREE.MeshStandardMaterial({ color: 0x1b2228, roughness: 0.12, metalness: 0.4, transparent: true, opacity: 0.85 });
-const tireMat  = new THREE.MeshStandardMaterial({ color: 0x161616, roughness: 0.95 });
+// ---- Materials ----
+const glassMat = new THREE.MeshStandardMaterial({ color: 0x171c20, roughness: 0.12, metalness: 0.4, transparent: true, opacity: 0.82 });
+const tireMat  = new THREE.MeshStandardMaterial({ color: 0x141414, roughness: 0.95 });
 const rimMat   = new THREE.MeshStandardMaterial({ color: 0x9aa0a6, roughness: 0.4, metalness: 0.7 });
-const trimMat  = new THREE.MeshStandardMaterial({ color: 0x2f3331, roughness: 0.7 });
+const trimMat  = new THREE.MeshStandardMaterial({ color: 0x2a2d2b, roughness: 0.7 });
+const hoodMat  = new THREE.MeshStandardMaterial({ color: 0x16181a, roughness: 0.55 });   // zwarte motorkap-hoes
 const lightMat = new THREE.MeshStandardMaterial({ color: 0xfff3cf, emissive: 0xffe9a8, emissiveIntensity: 0.7, roughness: 0.3 });
+const plateMat = new THREE.MeshStandardMaterial({ color: 0xf5c518, roughness: 0.5 });
 const solarMat = new THREE.MeshStandardMaterial({ color: 0x16243f, roughness: 0.25, metalness: 0.5 });
 const starMat  = new THREE.MeshStandardMaterial({ color: 0xd9dde1, roughness: 0.3, metalness: 0.85 });
 
-// ---- Build the van ----
-// As-stelsel: x = lengte (-front .. +achter), y = hoogte, z = breedte
+// ===================================================================
+//  De bus — zijprofiel geëxtrudeerd (x = lengte, y = hoogte, z = breedte)
+// ===================================================================
 const van = new THREE.Group();
+const LEN = 6.0, WIDTH = 2.0, HALF = WIDTH / 2;
 
+// --- Zijsilhouet als Shape (ronde neus, schuine voorruit, hoogdak, wielkasten) ---
+const s = new THREE.Shape();
+s.moveTo(0.10, 0.74);
+s.lineTo(0.05, 0.96);          // neuspunt
+s.lineTo(0.16, 1.22);
+s.lineTo(0.62, 1.28);          // motorkap
+s.lineTo(1.08, 1.30);          // schutbord
+s.lineTo(1.98, 2.16);          // bovenkant voorruit (sterk gehoekt)
+s.lineTo(2.10, 2.46);          // dakrand voor
+s.lineTo(5.86, 2.46);          // dak achter
+s.lineTo(6.00, 2.30);
+s.lineTo(6.00, 0.58);          // achterkant omlaag
+s.lineTo(5.15, 0.58);          // start achterwielkast
+s.absarc(4.53, 0.58, 0.62, 0, Math.PI, false);   // achterwielkast (boog omhoog)
+s.lineTo(1.85, 0.58);          // start voorwielkast
+s.absarc(1.23, 0.58, 0.62, 0, Math.PI, false);   // voorwielkast
+s.lineTo(0.45, 0.58);
+s.lineTo(0.10, 0.74);
+
+const bodyGeo = new THREE.ExtrudeGeometry(s, {
+  depth: WIDTH, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.05, bevelSegments: 2, curveSegments: 8,
+});
+bodyGeo.translate(-LEN / 2, 0, -HALF);   // centreren
+const body = new THREE.Mesh(bodyGeo, camoMat(0.3));
+van.add(body);
+
+// helper: plaatsbox
 function box(w, h, d, mat, x, y, z, rotZ = 0) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
   m.position.set(x, y, z);
@@ -173,83 +189,77 @@ function box(w, h, d, mat, x, y, z, rotZ = 0) {
   return m;
 }
 
-// Hoofdcarrosserie (cabine + onderbak)
-box(5.4, 1.5, 2.0, camoMat(3, 1.5), 0, 1.30, 0);
-// Hoogdak achter
-box(3.4, 1.05, 1.9, camoMat(2.2, 1.2), 0.7, 2.575, 0);
-// Lage motorkap-lip vooraan (laat grille/koplampen vrij)
-box(0.42, 0.55, 1.96, camoMat(1, 1), -2.86, 0.80, 0, -0.12);
+// --- Zwarte motorkap-hoes (kenmerkend op deze bus) ---
+box(0.95, 0.06, 1.86, hoodMat, -2.42, 1.20, 0, 0.22);
 
-// Glas
-box(0.08, 0.92, 1.78, glassMat, -2.34, 1.82, 0, -0.38);              // voorruit (gehoekt)
-box(1.25, 0.62, 0.06, glassMat, -1.95, 1.70, 1.005);                 // zijraam cabine R
-box(1.25, 0.62, 0.06, glassMat, -1.95, 1.70, -1.005);
-box(1.5, 0.85, 0.06, glassMat, 0.55, 1.65, 1.005);                   // camper-zijraam R
-box(1.5, 0.85, 0.06, glassMat, 0.55, 1.65, -1.005);
-box(0.08, 1.0, 1.5, glassMat, 2.715, 1.75, 0);                       // achterruit/deuren
+// --- Voorruit (volgt de schuine lijn) ---
+box(0.06, 1.30, 1.74, glassMat, -1.53, 1.73, 0, -Math.PI / 4);
 
-// Bumpers
-box(0.3, 0.42, 2.05, trimMat, -2.95, 0.6, 0);                        // voor
-box(0.3, 0.42, 2.05, trimMat, 2.78, 0.62, 0);                        // achter
-// Sideskirt-trim
-box(5.0, 0.18, 2.04, trimMat, 0, 0.62, 0);
+// --- Zijramen (op de zijvlakken z = ±HALF) ---
+box(0.95, 0.5, 0.06, glassMat, -1.15, 1.66, HALF + 0.001);   // cabineraam R
+box(0.95, 0.5, 0.06, glassMat, -1.15, 1.66, -HALF - 0.001);  // cabineraam L
+box(1.5, 0.72, 0.06, glassMat, 0.55, 1.72, HALF + 0.001);    // camperraam R
+box(1.5, 0.72, 0.06, glassMat, 0.55, 1.72, -HALF - 0.001);   // camperraam L
 
-// Grille + koplampen (op het voorvlak)
-box(0.06, 0.5, 1.15, trimMat, -2.74, 1.42, 0);                       // grille
-box(0.14, 0.3, 0.5, lightMat, -2.75, 1.14, 0.6);                     // koplamp R
-box(0.14, 0.3, 0.5, lightMat, -2.75, 1.14, -0.6);
-box(0.16, 0.16, 0.2, new THREE.MeshStandardMaterial({color:0xff7a2e,emissive:0xff6a1a,emissiveIntensity:0.5,roughness:0.4}), 2.86, 1.55, 0.78); // achterlicht R
-box(0.16, 0.16, 0.2, new THREE.MeshStandardMaterial({color:0xff7a2e,emissive:0xff6a1a,emissiveIntensity:0.5,roughness:0.4}), 2.86, 1.55, -0.78);
+// --- Achterruit (deuren) ---
+box(0.06, 0.85, 1.5, glassMat, 2.98, 1.78, 0);
 
-// Mercedes-ster op de neus
+// --- Grille + ster + ronde koplampen ---
+box(0.05, 0.34, 0.95, trimMat, -2.86, 1.06, 0);              // grille
+function headlight(z) {
+  const g = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.12, 18), lightMat);
+  g.rotation.z = Math.PI / 2;
+  g.position.set(-2.8, 1.16, z);
+  van.add(g);
+}
+headlight(0.66); headlight(-0.66);
+
 const star = new THREE.Group();
-const ring = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.022, 12, 32), starMat);
-star.add(ring);
+star.add(new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.018, 12, 28), starMat));
 for (let i = 0; i < 3; i++) {
-  const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.16, 0.02), starMat);
-  spoke.position.y = 0.08;
+  const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.013, 0.12, 0.016), starMat);
+  spoke.position.y = 0.06;
   const pivot = new THREE.Group();
   pivot.add(spoke);
   pivot.rotation.z = (i * 2 * Math.PI) / 3;
   star.add(pivot);
 }
 star.rotation.y = Math.PI / 2;
-star.position.set(-2.78, 1.78, 0);
+star.position.set(-2.92, 1.06, 0);
 van.add(star);
 
-// Zonnepaneel op het dak (knipoog naar de Victron-setup)
-const solar = box(2.7, 0.07, 1.45, solarMat, 0.7, 3.14, 0);
-for (let i = -1; i <= 1; i++) {                                      // celverdeling
-  box(2.7, 0.075, 0.02, trimMat, 0.7, 3.142, i * 0.45);
-}
-box(0.02, 0.075, 1.45, trimMat, -0.6, 3.142, 0);
-box(0.02, 0.075, 1.45, trimMat, 1.9, 3.142, 0);
-// Daklucht-/kachelpijpje
-box(0.18, 0.16, 0.18, trimMat, -1.5, 2.13, 0.5);
+// --- Bumpers + kentekenplaten ---
+box(0.34, 0.34, 1.92, trimMat, -2.92, 0.58, 0);             // voorbumper
+box(0.3, 0.34, 1.95, trimMat, 3.0, 0.6, 0);                 // achterbumper
+box(0.04, 0.16, 0.5, plateMat, -3.0, 0.78, 0);             // plaat voor
+box(0.04, 0.18, 0.55, plateMat, 3.06, 1.0, 0);            // plaat achter
 
-// Wielen
+// --- Achterlichten ---
+const tailMat = new THREE.MeshStandardMaterial({ color: 0xff7a2e, emissive: 0xff6a1a, emissiveIntensity: 0.5, roughness: 0.4 });
+box(0.06, 0.34, 0.22, tailMat, 3.01, 1.45, 0.78);
+box(0.06, 0.34, 0.22, tailMat, 3.01, 1.45, -0.78);
+
+// --- Zonnepaneel op het dak (knipoog naar Victron-setup) ---
+box(2.7, 0.07, 1.45, solarMat, 0.6, 2.55, 0);
+for (let i = -1; i <= 1; i++) box(2.7, 0.075, 0.02, trimMat, 0.6, 2.552, i * 0.45);
+box(0.02, 0.075, 1.45, trimMat, -0.7, 2.552, 0);
+box(0.02, 0.075, 1.45, trimMat, 1.9, 2.552, 0);
+
+// --- Wielen ---
 function wheel(x, z) {
   const g = new THREE.Group();
-  const tire = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.34, 28), tireMat);
-  tire.rotation.x = Math.PI / 2;
-  tire.castShadow = true;
-  g.add(tire);
-  const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 0.36, 18), rimMat);
-  rim.rotation.x = Math.PI / 2;
-  g.add(rim);
+  const tire = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.48, 0.34, 28), tireMat);
+  tire.rotation.x = Math.PI / 2; g.add(tire);
+  const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.36, 18), rimMat);
+  rim.rotation.x = Math.PI / 2; g.add(rim);
   const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.38, 10), trimMat);
-  hub.rotation.x = Math.PI / 2;
-  g.add(hub);
-  g.position.set(x, 0.46, z);
+  hub.rotation.x = Math.PI / 2; g.add(hub);
+  g.position.set(x, 0.48, z);
   van.add(g);
 }
-wheel(-1.65, 1.02); wheel(-1.65, -1.02);
-wheel(1.75, 1.02);  wheel(1.75, -1.02);
-
-// Wielkasten (donkere boog-aanzet)
-[-1.65, 1.75].forEach(x => {
-  box(1.25, 0.5, 2.06, trimMat, x, 0.7, 0);
-});
+const FRONT_AX = -1.77, REAR_AX = 1.53, WZ = 0.82;
+wheel(FRONT_AX, WZ);  wheel(FRONT_AX, -WZ);
+wheel(REAR_AX, WZ);   wheel(REAR_AX, -WZ);
 
 van.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
 scene.add(van);
@@ -273,8 +283,7 @@ controls.addEventListener('start', () => hint.classList.remove('show'));
 // ---- Animate ----
 const clock = new THREE.Clock();
 function tick() {
-  const t = clock.getElapsedTime();
-  van.position.y = Math.sin(t * 1.3) * 0.035;   // speels zweven
+  van.position.y = Math.sin(clock.getElapsedTime() * 1.3) * 0.035;
   controls.update();
   renderer.render(scene, camera);
   requestAnimationFrame(tick);

@@ -40,6 +40,24 @@
   .eyebrow{font-family:-apple-system,sans-serif;text-transform:uppercase;letter-spacing:.18em;
     font-size:.72rem;font-weight:700;color:var(--moss)}
 
+  /* ---------- TAALWISSELAAR ---------- */
+  .lang-switch{position:fixed;top:14px;right:14px;z-index:80;font-family:-apple-system,sans-serif}
+  .lang-switch .lang-toggle{display:inline-flex;align-items:center;gap:.5ch;
+    background:rgba(20,22,15,.55);color:#fff;border:1px solid rgba(255,255,255,.4);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    padding:8px 13px;border-radius:999px;font-weight:700;font-size:.85rem;cursor:pointer;line-height:1}
+  .lang-switch .lang-toggle:hover{background:rgba(20,22,15,.72)}
+  .lang-switch .lang-toggle .arr{font-size:.7rem;transition:transform .2s ease}
+  .lang-switch.open .lang-toggle .arr{transform:rotate(180deg)}
+  .lang-switch .menu{position:absolute;right:0;top:calc(100% + 6px);min-width:160px;
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;
+    box-shadow:var(--shadow);overflow:hidden;display:none}
+  .lang-switch.open .menu{display:block}
+  .lang-switch .menu button{display:flex;align-items:center;gap:.6ch;width:100%;text-align:left;
+    background:none;border:none;padding:11px 15px;font-size:.92rem;cursor:pointer;color:var(--ink)}
+  .lang-switch .menu button:hover{background:var(--sand)}
+  .lang-switch .menu button[aria-current="true"]{font-weight:700;background:var(--sand-2)}
+
   /* ---------- HERO ---------- */
   .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;
     color:#fff;overflow:hidden}
@@ -232,27 +250,39 @@
 </head>
 <body>
 
+<!-- ===================== TAALWISSELAAR ===================== -->
+<div class="lang-switch" id="langSwitch">
+  <button class="lang-toggle" id="langToggle" aria-haspopup="true" aria-expanded="false">
+    <span aria-hidden="true">🌐</span> <span id="langCurrent">NL</span> <span class="arr" aria-hidden="true">▾</span>
+  </button>
+  <div class="menu" role="menu" aria-label="Taal / Language / Idioma">
+    <button data-lang="nl" role="menuitem"><span aria-hidden="true">🇳🇱</span> Nederlands</button>
+    <button data-lang="en" role="menuitem"><span aria-hidden="true">🇬🇧</span> English</button>
+    <button data-lang="es" role="menuitem"><span aria-hidden="true">🇪🇸</span> Español</button>
+  </div>
+</div>
+
 <!-- ===================== HERO ===================== -->
 <header class="hero">
   <img class="bg" src="media/hero-bergen.webp" alt="Mercedes Sprinter camper in camouflagekleur voor besneeuwde bergen" fetchpriority="high" decoding="async">
   <div class="inner">
-    <span class="eyebrow">Te koop · Mercedes Sprinter Camper · 2002</span>
-    <h1>Je huis op wielen, klaar voor avontuur</h1>
+    <span class="eyebrow" data-i18n="hero_eyebrow">Te koop · Mercedes Sprinter Camper · 2002</span>
+    <h1 data-i18n="hero_h1">Je huis op wielen, klaar voor avontuur</h1>
     <div>
-      <span class="price-chip"><b>€&nbsp;8.950</b></span>
-      <p style="font-size:.82rem;color:#e7dcc2;margin-top:8px;max-width:44ch;text-shadow:0 1px 10px rgba(0,0,0,.55)">Onderbouwd met taxatie (€&nbsp;10.000) en ruim € 15.000 aan facturen.</p>
+      <span class="price-chip"><b data-i18n="hero_price">€ 8.950</b></span>
+      <p data-i18n="hero_pricesub" style="font-size:.82rem;color:#e7dcc2;margin-top:8px;max-width:44ch;text-shadow:0 1px 10px rgba(0,0,0,.55)">Onderbouwd met taxatie (€ 10.000) en ruim € 15.000 aan facturen.</p>
     </div>
     <div class="cta-row">
-      <a class="btn btn-wa" href="https://wa.me/31623191656?text=Hoi%20Roel%2C%20ik%20zag%20je%20advertentie%20van%20de%20Mercedes%20Sprinter%20camper%20en%20wil%20graag%20langskomen%20om%20%27m%20te%20bekijken.%20Ik%20zoek%20een%20bus%20om%20mee%20weg%20te%20gaan." target="_blank" rel="noopener">
+      <a class="btn btn-wa" href="https://wa.me/31623191656" target="_blank" rel="noopener">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.041zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-        Plan een bezichtiging
+        <span data-i18n="cta_plan">Plan een bezichtiging</span>
       </a>
-      <a class="btn btn-ghost" href="#galerij">Bekijk de bus</a>
+      <a class="btn btn-ghost" href="#galerij" data-i18n="hero_seebus">Bekijk de bus</a>
     </div>
     <div class="trust-strip">
-      <span><span class="ck">✓</span> Geen schadehistorie</span>
-      <span><span class="ck">✓</span> Verse APK tot feb '27</span>
-      <span><span class="ck">✓</span> Alle facturen aanwezig</span>
+      <span data-i18n-html="trust1"><span class="ck">✓</span> Geen schadehistorie</span>
+      <span data-i18n-html="trust2"><span class="ck">✓</span> Verse APK tot feb '27</span>
+      <span data-i18n-html="trust3"><span class="ck">✓</span> Alle facturen aanwezig</span>
     </div>
   </div>
 </header>
@@ -262,10 +292,10 @@
   <div class="wrap">
     <div class="grid">
       <div>
-        <span class="eyebrow">Een avond in de bus</span>
-        <h2>Slapen waar je wilt, op de camping of in het wild</h2>
-        <p class="lead">Stel je voor: je rijdt in de bergen en komt uit bij een mooie plek. Hier wil je de nacht doorbrengen. Met deze bus kan dat: Ik heb op de mooiste plekken gestaan, ver van elke camping. Deuren open slaan, koffie op het gaspitje, en genieten van je uitzicht. Dat kan ook jouw leven worden!</p>
-        <p class="lead">De afgelopen jaren is er veel liefde in de bus gestoken. Het motorblok is gereviseerd en er is de afgelopen jaren <strong>ruim € 15.000 aan onderhoud</strong> in gegaan, met facturen. Verse APK en nieuwe terreinbanden (Toyo Open Country, grof off-road profiel). De remleidingen zijn ook net vervangen.</p>
+        <span class="eyebrow" data-i18n="story_eyebrow">Een avond in de bus</span>
+        <h2 data-i18n="story_h2">Slapen waar je wilt, op de camping of in het wild</h2>
+        <p class="lead" data-i18n="story_p1">Stel je voor: je rijdt in de bergen en komt uit bij een mooie plek. Hier wil je de nacht doorbrengen. Met deze bus kan dat: Ik heb op de mooiste plekken gestaan, ver van elke camping. Deuren open slaan, koffie op het gaspitje, en genieten van je uitzicht. Dat kan ook jouw leven worden!</p>
+        <p class="lead" data-i18n-html="story_p2">De afgelopen jaren is er veel liefde in de bus gestoken. Het motorblok is gereviseerd en er is de afgelopen jaren <strong>ruim € 15.000 aan onderhoud</strong> in gegaan, met facturen. Verse APK en nieuwe terreinbanden (Toyo Open Country, grof off-road profiel). De remleidingen zijn ook net vervangen.</p>
       </div>
       <div class="photos">
         <img src="media/sfeer-schemering-1.webp" alt="Bus in het bos bij schemering met warme gloed van binnen" loading="lazy">
@@ -278,15 +308,15 @@
 <section class="video">
   <div class="wrap">
     <div class="section-head" style="margin:0 auto;text-align:center">
-      <span class="eyebrow">Stap virtueel in</span>
-      <h2>Rondleiding door de bus</h2>
+      <span class="eyebrow" data-i18n="vid_eyebrow">Stap virtueel in</span>
+      <h2 data-i18n="vid_h2">Rondleiding door de bus</h2>
     </div>
     <div class="vplayer">
       <iframe src="https://player.vimeo.com/video/1198891467?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
         loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen
         title="Rondleiding camperbus"></iframe>
     </div>
-    <p class="cap">Tip: zet het geluid aan 🔊</p>
+    <p class="cap" data-i18n="vid_cap">Tip: zet het geluid aan 🔊</p>
   </div>
 </section>
 
@@ -294,25 +324,25 @@
 <section id="galerij">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">In beeld</span>
-      <h2>Dit is wat je koopt</h2>
-      <p>De stoere camouflagelak zie je op geen enkele festivalweide over het hoofd. Klik voor groot.</p>
+      <span class="eyebrow" data-i18n="gal_eyebrow">In beeld</span>
+      <h2 data-i18n="gal_h2">Dit is wat je koopt</h2>
+      <p data-i18n="gal_p">De stoere camouflagelak zie je op geen enkele festivalweide over het hoofd. Klik voor groot.</p>
     </div>
     <div class="gallery" style="margin-top:34px">
-      <figure><img src="media/ext-front-l.webp" alt="Camouflage Sprinter voor-schuin" loading="lazy"><figcaption>Voor-schuin</figcaption></figure>
-      <figure><img src="media/int-bed.webp" alt="Slaapplaats met matrassen" loading="lazy"><figcaption>Slaapplaats, uitschuifbaar naar 2-persoons</figcaption></figure>
-      <figure><img src="media/ext-side.webp" alt="Zijaanzicht volledig camouflage" loading="lazy"><figcaption>Zijaanzicht, volledig camouflage</figcaption></figure>
-      <figure><img src="media/int-keuken.webp" alt="Keuken met gaskookplaat en spoelbak" loading="lazy"><figcaption>Keuken: gaskookplaat + spoelbak</figcaption></figure>
-      <figure><img src="media/ext-front-r.webp" alt="Voor-schuin rechts aan de bosrand" loading="lazy"><figcaption>Voor-schuin rechts</figcaption></figure>
-      <figure><img src="media/int-dashboard.webp" alt="Dashboard en stuur" loading="lazy"><figcaption>Dashboard + tellerstand</figcaption></figure>
-      <figure><img src="media/achteruitcamera.webp" alt="Achteruitrijcamera in de binnenspiegel" loading="lazy"><figcaption>Achteruitrijcamera in de spiegel</figcaption></figure>
-      <figure><img src="media/ext-rear-q.webp" alt="Achter-schuin met dubbele deuren" loading="lazy"><figcaption>Achterzijde met dubbele deuren + luifel</figcaption></figure>
-      <figure><img src="media/int-achterdeuren.webp" alt="Achterdeuren open, zicht naar binnen" loading="lazy"><figcaption>Achterin met de deuren open</figcaption></figure>
-      <figure><img src="media/int-opberg.webp" alt="Opbergruimte met kastjes" loading="lazy"><figcaption>Ruime opberg onder de keuken</figcaption></figure>
-      <figure><img src="media/ext-side-l.webp" alt="Zijaanzicht links" loading="lazy"><figcaption>Klaar voor vertrek</figcaption></figure>
-      <figure><img src="media/ext-luifel.webp" alt="Bus met uitgeklapte luifel op een bosplek" loading="lazy"><figcaption>Luifel uit, klaar voor de avond</figcaption></figure>
-      <figure><img src="media/sfeer-schemering-1.webp" alt="Boskamp bij schemering" loading="lazy"><figcaption>Off-grid in het bos</figcaption></figure>
-      <figure><img src="media/hero-bergen.webp" alt="Bus voor de bergen" loading="lazy"><figcaption>Onderweg in de bergen</figcaption></figure>
+      <figure><img src="media/ext-front-l.webp" alt="Camouflage Sprinter voor-schuin" loading="lazy"><figcaption data-i18n="cap_voorschuin">Voor-schuin</figcaption></figure>
+      <figure><img src="media/int-bed.webp" alt="Slaapplaats met matrassen" loading="lazy"><figcaption data-i18n="cap_bed">Slaapplaats, uitschuifbaar naar 2-persoons</figcaption></figure>
+      <figure><img src="media/ext-side.webp" alt="Zijaanzicht volledig camouflage" loading="lazy"><figcaption data-i18n="cap_zijaanzicht">Zijaanzicht, volledig camouflage</figcaption></figure>
+      <figure><img src="media/int-keuken.webp" alt="Keuken met gaskookplaat en spoelbak" loading="lazy"><figcaption data-i18n="cap_keuken">Keuken: gaskookplaat + spoelbak</figcaption></figure>
+      <figure><img src="media/ext-front-r.webp" alt="Voor-schuin rechts aan de bosrand" loading="lazy"><figcaption data-i18n="cap_voorschuinr">Voor-schuin rechts</figcaption></figure>
+      <figure><img src="media/int-dashboard.webp" alt="Dashboard en stuur" loading="lazy"><figcaption data-i18n="cap_dashboard">Dashboard + tellerstand</figcaption></figure>
+      <figure><img src="media/achteruitcamera.webp" alt="Achteruitrijcamera in de binnenspiegel" loading="lazy"><figcaption data-i18n="cap_camera">Achteruitrijcamera in de spiegel</figcaption></figure>
+      <figure><img src="media/ext-rear-q.webp" alt="Achter-schuin met dubbele deuren" loading="lazy"><figcaption data-i18n="cap_achter">Achterzijde met dubbele deuren + luifel</figcaption></figure>
+      <figure><img src="media/int-achterdeuren.webp" alt="Achterdeuren open, zicht naar binnen" loading="lazy"><figcaption data-i18n="cap_achterin">Achterin met de deuren open</figcaption></figure>
+      <figure><img src="media/int-opberg.webp" alt="Opbergruimte met kastjes" loading="lazy"><figcaption data-i18n="cap_opberg">Ruime opberg onder de keuken</figcaption></figure>
+      <figure><img src="media/ext-side-l.webp" alt="Zijaanzicht links" loading="lazy"><figcaption data-i18n="cap_vertrek">Klaar voor vertrek</figcaption></figure>
+      <figure><img src="media/ext-luifel.webp" alt="Bus met uitgeklapte luifel op een bosplek" loading="lazy"><figcaption data-i18n="cap_luifel">Luifel uit, klaar voor de avond</figcaption></figure>
+      <figure><img src="media/sfeer-schemering-1.webp" alt="Boskamp bij schemering" loading="lazy"><figcaption data-i18n="cap_offgrid">Off-grid in het bos</figcaption></figure>
+      <figure><img src="media/hero-bergen.webp" alt="Bus voor de bergen" loading="lazy"><figcaption data-i18n="cap_bergen">Onderweg in de bergen</figcaption></figure>
     </div>
   </div>
 </section>
@@ -321,21 +351,21 @@
 <section class="leven">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Hoe het echt was</span>
-      <h2>Onderweg met deze bus</h2>
+      <span class="eyebrow" data-i18n="leven_eyebrow">Hoe het echt was</span>
+      <h2 data-i18n="leven_h2">Onderweg met deze bus</h2>
     </div>
     <figure class="feature">
       <img src="media/vakantie_keuken.webp" alt="Koken in de bus met uitzicht op een bergweide en gebedsvlaggetjes voor het raam" loading="lazy">
-      <figcaption>Koken met uitzicht op de bergweide</figcaption>
+      <figcaption data-i18n="cap_koken">Koken met uitzicht op de bergweide</figcaption>
     </figure>
     <div class="pair">
       <figure>
         <img src="media/vakantie_berg.webp" alt="De camper aan een bergweg in de Aosta met besneeuwde toppen" loading="lazy">
-        <figcaption>Wildkamperen in de bergen van de Aosta</figcaption>
+        <figcaption data-i18n="cap_wild">Wildkamperen in de bergen van de Aosta</figcaption>
       </figure>
       <figure>
         <img src="media/vakantie_parkeren.webp" alt="De bus geparkeerd langs een bosweg, even stilstaan onderweg" loading="lazy">
-        <figcaption>Even stilstaan waar het mooi is</figcaption>
+        <figcaption data-i18n="cap_stilstaan">Even stilstaan waar het mooi is</figcaption>
       </figure>
     </div>
   </div>
@@ -345,52 +375,52 @@
 <section class="specs">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">In één oogopslag</span>
-      <h2>De specificaties</h2>
+      <span class="eyebrow" data-i18n="specs_eyebrow">In één oogopslag</span>
+      <h2 data-i18n="specs_h2">De specificaties</h2>
     </div>
     <div class="spec-grid">
       <div class="spec-card">
-        <h3>🔧 Techniek</h3>
+        <h3 data-i18n="spec_tech_h">🔧 Techniek</h3>
         <dl>
-          <dt>Merk / type</dt><dd>Mercedes Sprinter 903.6</dd>
-          <dt>Bouwjaar</dt><dd>2002</dd>
-          <dt>Motor</dt><dd>2.148 cc · 95 kW / 129 pk</dd>
-          <dt>Brandstof</dt><dd>Diesel · Euro 3</dd>
-          <dt>Transmissie</dt><dd>Automaat · achterwiel</dd>
-          <dt>Km-stand</dt><dd>367.718 (juni '26)</dd>
-          <dt>Verbruik</dt><dd>ca. 1 op 11,5</dd>
-          <dt>APK</dt><dd>tot 20-02-2027</dd>
-          <dt>Schadehistorie</dt><dd>geen (RDW)</dd>
-          <dt>Formaat</dt><dd>L2H2</dd>
-          <dt>Cruise-control</dt><dd>Extra ingebouwd</dd>
+          <dt data-i18n="dt_merk">Merk / type</dt><dd>Mercedes Sprinter 903.6</dd>
+          <dt data-i18n="dt_bouwjaar">Bouwjaar</dt><dd>2002</dd>
+          <dt data-i18n="dt_motor">Motor</dt><dd data-i18n="dd_motor">2.148 cc · 95 kW / 129 pk</dd>
+          <dt data-i18n="dt_brandstof">Brandstof</dt><dd>Diesel · Euro 3</dd>
+          <dt data-i18n="dt_transmissie">Transmissie</dt><dd data-i18n="dd_transmissie">Automaat · achterwiel</dd>
+          <dt data-i18n="dt_km">Km-stand</dt><dd data-i18n="dd_km">367.718 (juni '26)</dd>
+          <dt data-i18n="dt_verbruik">Verbruik</dt><dd data-i18n="dd_verbruik">ca. 1 op 11,5</dd>
+          <dt data-i18n="dt_apk">APK</dt><dd data-i18n="dd_apk">tot 20-02-2027</dd>
+          <dt data-i18n="dt_schade">Schadehistorie</dt><dd data-i18n="dd_schade">geen (RDW)</dd>
+          <dt data-i18n="dt_formaat">Formaat</dt><dd>L2H2</dd>
+          <dt data-i18n="dt_cruise">Cruise-control</dt><dd data-i18n="dd_cruise">Extra ingebouwd</dd>
         </dl>
       </div>
       <div class="spec-card">
-        <h3>🏕️ Camperinrichting</h3>
+        <h3 data-i18n="spec_camper_h">🏕️ Camperinrichting</h3>
         <ul>
-          <li>Slaapplaats 200×80 cm; lattenbodem uitschuifbaar naar volwaardig tweepersoons (twee matrassen aanwezig)</li>
-          <li>Sta-hoogte geschikt tot 1.86 m+</li>
-          <li>Keuken: gaskookplaat op gasfles (6,7 kg, '23, π-gekeurd), koelkast, watertank met 12V-pomp en kraan</li>
-          <li>VEVOR dieselstandkachel 8 kW met LCD, afstandsbediening én app</li>
-          <li>Dakraam, raamroosters voor, 12V-ventilator</li>
-          <li>Achteruitrijcamera met monitor in de binnenspiegel (fijn bij zo'n lange bus)</li>
-          <li>Luifel die je droog houdt in de regen of afkoelt bij felle zon</li>
+          <li data-i18n="li_bed">Slaapplaats 200×80 cm; lattenbodem uitschuifbaar naar volwaardig tweepersoons (twee matrassen aanwezig)</li>
+          <li data-i18n="li_stahoogte">Sta-hoogte geschikt tot 1.86 m+</li>
+          <li data-i18n="li_keuken">Keuken: gaskookplaat op gasfles (6,7 kg, '23, π-gekeurd), koelkast, watertank met 12V-pomp en kraan</li>
+          <li data-i18n="li_kachel">VEVOR dieselstandkachel 8 kW met LCD, afstandsbediening én app</li>
+          <li data-i18n="li_dakraam">Dakraam, raamroosters voor, 12V-ventilator</li>
+          <li data-i18n="li_camera">Achteruitrijcamera met monitor in de binnenspiegel (fijn bij zo'n lange bus)</li>
+          <li data-i18n="li_luifel">Luifel die je droog houdt in de regen of afkoelt bij felle zon</li>
         </ul>
       </div>
     </div>
 
     <div class="motorcard">
       <div>
-        <span class="eyebrow" style="color:var(--moss)">Hoor 'm zelf</span>
-        <h3>Een 24 jaar oude diesel? Luister maar.</h3>
-        <p>De motor is rond de 335.000 km gereviseerd met een nieuw motorblok. Nu staat de teller op 367.718 km, zo'n 33.000 km later.</p>
+        <span class="eyebrow" style="color:var(--moss)" data-i18n="motor_eyebrow">Hoor 'm zelf</span>
+        <h3 data-i18n="motor_h3">Een 24 jaar oude diesel? Luister maar.</h3>
+        <p data-i18n="motor_p">De motor is rond de 335.000 km gereviseerd met een nieuw motorblok. Nu staat de teller op 367.718 km, zo'n 33.000 km later.</p>
       </div>
       <div class="vplayer">
         <iframe src="https://player.vimeo.com/video/1198891036?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
           loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen
           title="Motor starten en rijden"></iframe>
       </div>
-      <p class="cap">Het woord wat ik zocht was cruise-control 😂</p>
+      <p class="cap" data-i18n="motor_cap">Het woord wat ik zocht was cruise-control 😂</p>
     </div>
   </div>
 </section>
@@ -399,15 +429,15 @@
 <section class="offgrid">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Energie aan boord</span>
-      <h2>Off-grid op zonne-energie met Victron</h2>
-      <p>Een weekend stroom zonder ergens aan te sluiten.</p>
+      <span class="eyebrow" data-i18n="off_eyebrow">Energie aan boord</span>
+      <h2 data-i18n="off_h2">Off-grid op zonne-energie met Victron</h2>
+      <p data-i18n="off_p">Een weekend stroom zonder ergens aan te sluiten.</p>
     </div>
     <div class="feat">
-      <div><span class="big">230 W</span><small>2× BlueSolar zonnepaneel</small></div>
-      <div><span class="big">MPPT</span><small>SmartSolar 100/30 laadregelaar</small></div>
-      <div><span class="big">2 + 1</span><small>huishoudaccu's + startaccu</small></div>
-      <div><span class="big">230 V</span><small>omvormer (Bluetooth) + walstroomaansluiting (camping of thuis)</small></div>
+      <div><span class="big">230 W</span><small data-i18n="off1">2× BlueSolar zonnepaneel</small></div>
+      <div><span class="big">MPPT</span><small data-i18n="off2">SmartSolar 100/30 laadregelaar</small></div>
+      <div><span class="big">2 + 1</span><small data-i18n="off3">huishoudaccu's + startaccu</small></div>
+      <div><span class="big">230 V</span><small data-i18n="off4">omvormer (Bluetooth) + walstroomaansluiting (camping of thuis)</small></div>
     </div>
   </div>
 </section>
@@ -416,19 +446,19 @@
 <section class="maint">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Wat erin is gestoken</span>
-      <h2>Ruim € 15.000 aan onderhoud, mét facturen</h2>
+      <span class="eyebrow" data-i18n="maint_eyebrow">Wat erin is gestoken</span>
+      <h2 data-i18n="maint_h2">Ruim € 15.000 aan onderhoud, mét facturen</h2>
     </div>
     <div class="badges">
-      <span class="badge"><span class="ck">✓</span> Alle facturen aanwezig</span>
-      <span class="badge"><span class="ck">✓</span> Getaxeerd op € 10.000</span>
-      <span class="badge"><span class="ck">✓</span> Geen schadehistorie (RDW)</span>
+      <span class="badge" data-i18n-html="badge1"><span class="ck">✓</span> Alle facturen aanwezig</span>
+      <span class="badge" data-i18n-html="badge2"><span class="ck">✓</span> Getaxeerd op € 10.000</span>
+      <span class="badge" data-i18n-html="badge3"><span class="ck">✓</span> Geen schadehistorie (RDW)</span>
     </div>
     <div class="timeline">
-      <div class="item"><span class="yr">Revisie (vorige eigenaar)</span><p>Motorblok gereviseerd · nieuwe turbo, verstuivers, brandstoflijnen, versnellingsbakpomp. Samen ruim € 11.000.</p></div>
-      <div class="item"><span class="yr">Aug 2024</span><p>Nieuwe dynamo (ANWB).</p></div>
-      <div class="item"><span class="yr">Feb 2025</span><p>Grote beurt · nieuwe distributieriem · hogedrukpomp + leidingen.</p></div>
-      <div class="item"><span class="yr">Feb 2026 (BOVAG)</span><p>Grote beurt + APK · 2× nieuwe banden Toyo Open Country · nieuwe remleidingen · laswerk · alle filters + remvloeistof.</p></div>
+      <div class="item"><span class="yr" data-i18n="tl1_yr">Revisie (vorige eigenaar)</span><p data-i18n="tl1_p">Motorblok gereviseerd · nieuwe turbo, verstuivers, brandstoflijnen, versnellingsbakpomp. Samen ruim € 11.000.</p></div>
+      <div class="item"><span class="yr" data-i18n="tl2_yr">Aug 2024</span><p data-i18n="tl2_p">Nieuwe dynamo (ANWB).</p></div>
+      <div class="item"><span class="yr" data-i18n="tl3_yr">Feb 2025</span><p data-i18n="tl3_p">Grote beurt · nieuwe distributieriem · hogedrukpomp + leidingen.</p></div>
+      <div class="item"><span class="yr" data-i18n="tl4_yr">Feb 2026 (BOVAG)</span><p data-i18n="tl4_p">Grote beurt + APK · 2× nieuwe banden Toyo Open Country · nieuwe remleidingen · laswerk · alle filters + remvloeistof.</p></div>
     </div>
   </div>
 </section>
@@ -437,18 +467,18 @@
 <section class="dossier">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Compleet gedocumenteerd</span>
-      <h2>Je krijgt het hele dossier mee</h2>
-      <p>Geen kat in de zak. Alles gaat digitaal met de bus mee:</p>
+      <span class="eyebrow" data-i18n="dos_eyebrow">Compleet gedocumenteerd</span>
+      <h2 data-i18n="dos_h2">Je krijgt het hele dossier mee</h2>
+      <p data-i18n="dos_p">Geen kat in de zak. Alles gaat digitaal met de bus mee:</p>
     </div>
     <div class="box" style="margin-top:24px">
       <ul>
-        <li>Alle onderhouds- en reparatiefacturen</li>
-        <li>Taxatierapport (vervangingswaarde € 10.000)</li>
-        <li>Volledige onderhoudshistorie</li>
-        <li>Kant-en-klare kostenberekening: gemeten verbruik + kosten per km</li>
+        <li data-i18n="dos1">Alle onderhouds- en reparatiefacturen</li>
+        <li data-i18n="dos2">Taxatierapport (vervangingswaarde € 10.000)</li>
+        <li data-i18n="dos3">Volledige onderhoudshistorie</li>
+        <li data-i18n="dos4">Kant-en-klare kostenberekening: gemeten verbruik + kosten per km</li>
       </ul>
-      <p style="margin-top:16px;color:var(--muted)">Overzichtelijk en compleet. Als je wilt, maak ik een assistent voor in je Claude of ChatGPT; dan kun je alles vragen over de bus wat je wilt.</p>
+      <p style="margin-top:16px;color:var(--muted)" data-i18n="dos_p2">Overzichtelijk en compleet. Als je wilt, maak ik een assistent voor in je Claude of ChatGPT; dan kun je alles vragen over de bus wat je wilt.</p>
     </div>
   </div>
 </section>
@@ -457,30 +487,30 @@
 <section class="honest">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Geen verrassingen</span>
-      <h2>Eerlijk over de staat</h2>
+      <span class="eyebrow" data-i18n="hon_eyebrow">Geen verrassingen</span>
+      <h2 data-i18n="hon_h2">Eerlijk over de staat</h2>
     </div>
     <div class="note" style="margin-top:22px">
-      <span class="tag">Een echte avontuurbus, geen showroommodel</span>
-      <p>Een 24 jaar oude bus heeft een paar kleine punten. Ik benoem ze allemaal, zodat je niet voor verrassingen komt te staan:</p>
+      <span class="tag" data-i18n="hon_tag">Een echte avontuurbus, geen showroommodel</span>
+      <p data-i18n="hon_p">Een 24 jaar oude bus heeft een paar kleine punten. Ik benoem ze allemaal, zodat je niet voor verrassingen komt te staan:</p>
       <ul>
-        <li>Waterkraantje werkt niet (eenvoudig zelf te vervangen, ~€30)</li>
-        <li>Enkele verlichtingsdetails (kenteken-LED, reflectoren) mogen nog gefixt</li>
-        <li>Slot bestuurdersdeur sluit af en toe niet in één keer (meestal prima, kwestie van afstellen)</li>
-        <li>Schuif (deurvanger) van de rechter achterdeur is kapot</li>
-        <li>Groot zijraam bij de keuken kan niet open</li>
-        <li>Walstroomkabel is kort; een langere kabel met stekker werkt fijner (paar tientjes)</li>
-        <li>Een beetje roest aan de onderranden (o.a. achter) en een kras bij de bestuurdersdeur</li>
+        <li data-i18n="hon1">Waterkraantje werkt niet (eenvoudig zelf te vervangen, ~€30)</li>
+        <li data-i18n="hon2">Enkele verlichtingsdetails (kenteken-LED, reflectoren) mogen nog gefixt</li>
+        <li data-i18n="hon3">Slot bestuurdersdeur sluit af en toe niet in één keer (meestal prima, kwestie van afstellen)</li>
+        <li data-i18n="hon4">Schuif (deurvanger) van de rechter achterdeur is kapot</li>
+        <li data-i18n="hon5">Groot zijraam bij de keuken kan niet open</li>
+        <li data-i18n="hon6">Walstroomkabel is kort; een langere kabel met stekker werkt fijner (paar tientjes)</li>
+        <li data-i18n="hon7">Een beetje roest aan de onderranden (o.a. achter) en een kras bij de bestuurdersdeur</li>
       </ul>
-      <p style="margin-top:14px">Niets dat het rijden of kamperen in de weg zit. <strong>Let op:</strong> de motor is Euro 3. Daarmee kom je de milieuzones van de grote steden (o.a. Amsterdam, Utrecht) niet meer in (vaak uitzonderingen als je er woont). Voor kamperen en reizen buiten de stadskernen maakt dat niets uit.</p>
+      <p style="margin-top:14px" data-i18n-html="hon_note">Niets dat het rijden of kamperen in de weg zit. <strong>Let op:</strong> de motor is Euro 3. Daarmee kom je de milieuzones van de grote steden (o.a. Amsterdam, Utrecht) niet meer in (vaak uitzonderingen als je er woont). Voor kamperen en reizen buiten de stadskernen maakt dat niets uit.</p>
     </div>
 
     <div class="staat-shots">
-      <figure class="wide"><img src="media/staat-kras.webp" alt="Krasje in de lak op de zijkant" loading="lazy"><figcaption>Krasje in de lak</figcaption></figure>
+      <figure class="wide"><img src="media/staat-kras.webp" alt="Krasje in de lak op de zijkant" loading="lazy"><figcaption data-i18n="cap_kras">Krasje in de lak</figcaption></figure>
       <div class="row3">
-        <figure><img src="media/staat-roest.webp" alt="Wat roest aan de onderrand achter" loading="lazy"><figcaption>Roest onderrand achter</figcaption></figure>
-        <figure><img src="media/staat-slot.webp" alt="Kapot palletje (deurvanger) van de achterdeur" loading="lazy"><figcaption>Deurvanger achterdeur kapot</figcaption></figure>
-        <figure><img src="media/staat-koplamp.webp" alt="Lichte roestsporen onder koplamp" loading="lazy"><figcaption>Lichte roestsporen onder koplamp</figcaption></figure>
+        <figure><img src="media/staat-roest.webp" alt="Wat roest aan de onderrand achter" loading="lazy"><figcaption data-i18n="cap_roest">Roest onderrand achter</figcaption></figure>
+        <figure><img src="media/staat-slot.webp" alt="Kapot palletje (deurvanger) van de achterdeur" loading="lazy"><figcaption data-i18n="cap_deurvanger">Deurvanger achterdeur kapot</figcaption></figure>
+        <figure><img src="media/staat-koplamp.webp" alt="Lichte roestsporen onder koplamp" loading="lazy"><figcaption data-i18n="cap_koplamp">Lichte roestsporen onder koplamp</figcaption></figure>
       </div>
     </div>
   </div>
@@ -490,14 +520,14 @@
 <section class="specs">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Geen verborgen reden</span>
-      <h2>Waarom te koop?</h2>
+      <span class="eyebrow" data-i18n="waarom_eyebrow">Geen verborgen reden</span>
+      <h2 data-i18n="waarom_h2">Waarom te koop?</h2>
     </div>
     <div class="waarom">
       <img src="media/sfeer-schemering-2.webp" alt="Kampeerplek in het bos bij avondlicht" loading="lazy">
       <div class="box">
-        <p style="font-size:1.08rem">Deze bus heeft een tijd als mijn huis gediend. Ik heb er echt in geleefd, en dat zie je aan hoe compleet hij is ingericht. De eerste keer dat ik 'm meenam naar de kust was ik zielsgelukkig, en ik stond gewoon op een stuk asfalt. 's Avonds een gitaar in de hoek en een paar spotjes aan, of wildkamperen in de bergen van de Aosta met m'n vriendin; dat zijn de herinneringen die ik met deze bus heb gemaakt.</p>
-        <p style="margin-top:12px;color:var(--muted)">Inmiddels heb ik een vaste woonplek en is het financieel niet meer houdbaar om 'm aan te houden. Ik doe 'm met pijn in m'n hart weg, en gun 'm aan iemand die er net zulke plekken mee opzoekt: kamperen, op avontuur, of als huisje.</p>
+        <p style="font-size:1.08rem" data-i18n="waarom_p1">Deze bus heeft een tijd als mijn huis gediend. Ik heb er echt in geleefd, en dat zie je aan hoe compleet hij is ingericht. De eerste keer dat ik 'm meenam naar de kust was ik zielsgelukkig, en ik stond gewoon op een stuk asfalt. 's Avonds een gitaar in de hoek en een paar spotjes aan, of wildkamperen in de bergen van de Aosta met m'n vriendin; dat zijn de herinneringen die ik met deze bus heb gemaakt.</p>
+        <p style="margin-top:12px;color:var(--muted)" data-i18n="waarom_p2">Inmiddels heb ik een vaste woonplek en is het financieel niet meer houdbaar om 'm aan te houden. Ik doe 'm met pijn in m'n hart weg, en gun 'm aan iemand die er net zulke plekken mee opzoekt: kamperen, op avontuur, of als huisje.</p>
       </div>
     </div>
   </div>
@@ -506,33 +536,510 @@
 <!-- ===================== FINAL CTA ===================== -->
 <section class="final" id="contact">
   <div class="wrap">
-    <span class="eyebrow" style="color:#c4cda0">Wil je deze zomer al op pad?</span>
-    <h2>Plan je bezichtiging</h2>
-    <p>Tijdens een bezichtiging nemen we de tijd: ik laat alles zien, beanwtoord je vragen en we maken een proefrit. Oprecht geintereseerd? Stuur dan een appje en we plannen een afspraak.</p>
-    <p style="margin:18px auto 0;color:#fff;font-size:1.15rem"><strong>Vraagprijs € 8.950</strong> <span style="color:#c8c2b1;font-size:.92rem">· redelijk bod bespreekbaar</span></p>
+    <span class="eyebrow" style="color:#c4cda0" data-i18n="final_eyebrow">Wil je deze zomer al op pad?</span>
+    <h2 data-i18n="final_h2">Plan je bezichtiging</h2>
+    <p data-i18n="final_p">Tijdens een bezichtiging nemen we de tijd: ik laat alles zien, beantwoord je vragen en we maken een proefrit. Oprecht geïnteresseerd? Stuur dan een appje en we plannen een afspraak.</p>
+    <p style="margin:18px auto 0;color:#fff;font-size:1.15rem" data-i18n-html="final_price"><strong>Vraagprijs € 8.950</strong> <span style="color:#c8c2b1;font-size:.92rem">· redelijk bod bespreekbaar</span></p>
     <div class="cta-row" style="margin-top:24px">
-      <a class="btn btn-wa" href="https://wa.me/31623191656?text=Hoi%20Roel%2C%20ik%20zag%20je%20advertentie%20van%20de%20Mercedes%20Sprinter%20camper%20en%20wil%20graag%20langskomen%20om%20%27m%20te%20bekijken.%20Ik%20zoek%20een%20bus%20om%20mee%20weg%20te%20gaan." target="_blank" rel="noopener">
+      <a class="btn btn-wa" href="https://wa.me/31623191656" target="_blank" rel="noopener">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.041zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-        App via WhatsApp
+        <span data-i18n="cta_wa">App via WhatsApp</span>
       </a>
-      <a class="btn btn-ghost" href="tel:+31623191656">Bel 06 23191656</a>
+      <a class="btn btn-ghost" href="tel:+31623191656" data-i18n="cta_call">Bel 06 23191656</a>
     </div>
-    <p class="where">📍 Bezichtigen in Amersfoort-zuid</p>
+    <p class="where" data-i18n="final_where">📍 Bezichtigen in Amersfoort-zuid</p>
   </div>
 </section>
 
-<footer>
+<footer data-i18n="footer">
   Mercedes-Benz Sprinter 903.6 · 2002 · kenteken 82-RFZ-7 · particuliere verkoop
 </footer>
 
 <!-- sticky mobile CTA -->
 <div class="sticky-cta">
-  <a class="btn btn-wa" style="width:100%;justify-content:center" href="https://wa.me/31623191656?text=Hoi%20Roel%2C%20ik%20zag%20je%20advertentie%20van%20de%20Mercedes%20Sprinter%20camper%20en%20wil%20graag%20langskomen%20om%20%27m%20te%20bekijken.%20Ik%20zoek%20een%20bus%20om%20mee%20weg%20te%20gaan." target="_blank" rel="noopener">Plan een bezichtiging via WhatsApp</a>
+  <a class="btn btn-wa" style="width:100%;justify-content:center" href="https://wa.me/31623191656" target="_blank" rel="noopener" data-i18n="sticky_cta">Plan een bezichtiging via WhatsApp</a>
 </div>
 
 <!-- lightbox -->
 <div class="lb" id="lb"><span class="close">&times;</span><img src="" alt=""></div>
+
 <script>
+  /* ---------- Vertalingen NL / EN / ES ---------- */
+  var I18N = {
+    nl: {
+      meta_title: `Mercedes Sprinter Camper · gereviseerde motor · Victron solar · APK feb '27`,
+      meta_desc: `Rijklare camouflage-avontuurbus. Gereviseerde motor, verse APK tot feb 2027, Victron off-grid, alle facturen aanwezig. Vraagprijs € 8.950.`,
+      hero_eyebrow: `Te koop · Mercedes Sprinter Camper · 2002`,
+      hero_h1: `Je huis op wielen, klaar voor avontuur`,
+      hero_price: `€ 8.950`,
+      hero_pricesub: `Onderbouwd met taxatie (€ 10.000) en ruim € 15.000 aan facturen.`,
+      cta_plan: `Plan een bezichtiging`,
+      hero_seebus: `Bekijk de bus`,
+      trust1: `<span class="ck">✓</span> Geen schadehistorie`,
+      trust2: `<span class="ck">✓</span> Verse APK tot feb '27`,
+      trust3: `<span class="ck">✓</span> Alle facturen aanwezig`,
+      story_eyebrow: `Een avond in de bus`,
+      story_h2: `Slapen waar je wilt, op de camping of in het wild`,
+      story_p1: `Stel je voor: je rijdt in de bergen en komt uit bij een mooie plek. Hier wil je de nacht doorbrengen. Met deze bus kan dat: Ik heb op de mooiste plekken gestaan, ver van elke camping. Deuren open slaan, koffie op het gaspitje, en genieten van je uitzicht. Dat kan ook jouw leven worden!`,
+      story_p2: `De afgelopen jaren is er veel liefde in de bus gestoken. Het motorblok is gereviseerd en er is de afgelopen jaren <strong>ruim € 15.000 aan onderhoud</strong> in gegaan, met facturen. Verse APK en nieuwe terreinbanden (Toyo Open Country, grof off-road profiel). De remleidingen zijn ook net vervangen.`,
+      vid_eyebrow: `Stap virtueel in`,
+      vid_h2: `Rondleiding door de bus`,
+      vid_cap: `Tip: zet het geluid aan 🔊`,
+      gal_eyebrow: `In beeld`,
+      gal_h2: `Dit is wat je koopt`,
+      gal_p: `De stoere camouflagelak zie je op geen enkele festivalweide over het hoofd. Klik voor groot.`,
+      cap_voorschuin: `Voor-schuin`,
+      cap_bed: `Slaapplaats, uitschuifbaar naar 2-persoons`,
+      cap_zijaanzicht: `Zijaanzicht, volledig camouflage`,
+      cap_keuken: `Keuken: gaskookplaat + spoelbak`,
+      cap_voorschuinr: `Voor-schuin rechts`,
+      cap_dashboard: `Dashboard + tellerstand`,
+      cap_camera: `Achteruitrijcamera in de spiegel`,
+      cap_achter: `Achterzijde met dubbele deuren + luifel`,
+      cap_achterin: `Achterin met de deuren open`,
+      cap_opberg: `Ruime opberg onder de keuken`,
+      cap_vertrek: `Klaar voor vertrek`,
+      cap_luifel: `Luifel uit, klaar voor de avond`,
+      cap_offgrid: `Off-grid in het bos`,
+      cap_bergen: `Onderweg in de bergen`,
+      leven_eyebrow: `Hoe het echt was`,
+      leven_h2: `Onderweg met deze bus`,
+      cap_koken: `Koken met uitzicht op de bergweide`,
+      cap_wild: `Wildkamperen in de bergen van de Aosta`,
+      cap_stilstaan: `Even stilstaan waar het mooi is`,
+      specs_eyebrow: `In één oogopslag`,
+      specs_h2: `De specificaties`,
+      spec_tech_h: `🔧 Techniek`,
+      dt_merk: `Merk / type`,
+      dt_bouwjaar: `Bouwjaar`,
+      dt_motor: `Motor`,
+      dd_motor: `2.148 cc · 95 kW / 129 pk`,
+      dt_brandstof: `Brandstof`,
+      dt_transmissie: `Transmissie`,
+      dd_transmissie: `Automaat · achterwiel`,
+      dt_km: `Km-stand`,
+      dd_km: `367.718 (juni '26)`,
+      dt_verbruik: `Verbruik`,
+      dd_verbruik: `ca. 1 op 11,5`,
+      dt_apk: `APK`,
+      dd_apk: `tot 20-02-2027`,
+      dt_schade: `Schadehistorie`,
+      dd_schade: `geen (RDW)`,
+      dt_formaat: `Formaat`,
+      dt_cruise: `Cruise-control`,
+      dd_cruise: `Extra ingebouwd`,
+      spec_camper_h: `🏕️ Camperinrichting`,
+      li_bed: `Slaapplaats 200×80 cm; lattenbodem uitschuifbaar naar volwaardig tweepersoons (twee matrassen aanwezig)`,
+      li_stahoogte: `Sta-hoogte geschikt tot 1.86 m+`,
+      li_keuken: `Keuken: gaskookplaat op gasfles (6,7 kg, '23, π-gekeurd), koelkast, watertank met 12V-pomp en kraan`,
+      li_kachel: `VEVOR dieselstandkachel 8 kW met LCD, afstandsbediening én app`,
+      li_dakraam: `Dakraam, raamroosters voor, 12V-ventilator`,
+      li_camera: `Achteruitrijcamera met monitor in de binnenspiegel (fijn bij zo'n lange bus)`,
+      li_luifel: `Luifel die je droog houdt in de regen of afkoelt bij felle zon`,
+      motor_eyebrow: `Hoor 'm zelf`,
+      motor_h3: `Een 24 jaar oude diesel? Luister maar.`,
+      motor_p: `De motor is rond de 335.000 km gereviseerd met een nieuw motorblok. Nu staat de teller op 367.718 km, zo'n 33.000 km later.`,
+      motor_cap: `Het woord wat ik zocht was cruise-control 😂`,
+      off_eyebrow: `Energie aan boord`,
+      off_h2: `Off-grid op zonne-energie met Victron`,
+      off_p: `Een weekend stroom zonder ergens aan te sluiten.`,
+      off1: `2× BlueSolar zonnepaneel`,
+      off2: `SmartSolar 100/30 laadregelaar`,
+      off3: `huishoudaccu's + startaccu`,
+      off4: `omvormer (Bluetooth) + walstroomaansluiting (camping of thuis)`,
+      maint_eyebrow: `Wat erin is gestoken`,
+      maint_h2: `Ruim € 15.000 aan onderhoud, mét facturen`,
+      badge1: `<span class="ck">✓</span> Alle facturen aanwezig`,
+      badge2: `<span class="ck">✓</span> Getaxeerd op € 10.000`,
+      badge3: `<span class="ck">✓</span> Geen schadehistorie (RDW)`,
+      tl1_yr: `Revisie (vorige eigenaar)`,
+      tl1_p: `Motorblok gereviseerd · nieuwe turbo, verstuivers, brandstoflijnen, versnellingsbakpomp. Samen ruim € 11.000.`,
+      tl2_yr: `Aug 2024`,
+      tl2_p: `Nieuwe dynamo (ANWB).`,
+      tl3_yr: `Feb 2025`,
+      tl3_p: `Grote beurt · nieuwe distributieriem · hogedrukpomp + leidingen.`,
+      tl4_yr: `Feb 2026 (BOVAG)`,
+      tl4_p: `Grote beurt + APK · 2× nieuwe banden Toyo Open Country · nieuwe remleidingen · laswerk · alle filters + remvloeistof.`,
+      dos_eyebrow: `Compleet gedocumenteerd`,
+      dos_h2: `Je krijgt het hele dossier mee`,
+      dos_p: `Geen kat in de zak. Alles gaat digitaal met de bus mee:`,
+      dos1: `Alle onderhouds- en reparatiefacturen`,
+      dos2: `Taxatierapport (vervangingswaarde € 10.000)`,
+      dos3: `Volledige onderhoudshistorie`,
+      dos4: `Kant-en-klare kostenberekening: gemeten verbruik + kosten per km`,
+      dos_p2: `Overzichtelijk en compleet. Als je wilt, maak ik een assistent voor in je Claude of ChatGPT; dan kun je alles vragen over de bus wat je wilt.`,
+      hon_eyebrow: `Geen verrassingen`,
+      hon_h2: `Eerlijk over de staat`,
+      hon_tag: `Een echte avontuurbus, geen showroommodel`,
+      hon_p: `Een 24 jaar oude bus heeft een paar kleine punten. Ik benoem ze allemaal, zodat je niet voor verrassingen komt te staan:`,
+      hon1: `Waterkraantje werkt niet (eenvoudig zelf te vervangen, ~€30)`,
+      hon2: `Enkele verlichtingsdetails (kenteken-LED, reflectoren) mogen nog gefixt`,
+      hon3: `Slot bestuurdersdeur sluit af en toe niet in één keer (meestal prima, kwestie van afstellen)`,
+      hon4: `Schuif (deurvanger) van de rechter achterdeur is kapot`,
+      hon5: `Groot zijraam bij de keuken kan niet open`,
+      hon6: `Walstroomkabel is kort; een langere kabel met stekker werkt fijner (paar tientjes)`,
+      hon7: `Een beetje roest aan de onderranden (o.a. achter) en een kras bij de bestuurdersdeur`,
+      hon_note: `Niets dat het rijden of kamperen in de weg zit. <strong>Let op:</strong> de motor is Euro 3. Daarmee kom je de milieuzones van de grote steden (o.a. Amsterdam, Utrecht) niet meer in (vaak uitzonderingen als je er woont). Voor kamperen en reizen buiten de stadskernen maakt dat niets uit.`,
+      cap_kras: `Krasje in de lak`,
+      cap_roest: `Roest onderrand achter`,
+      cap_deurvanger: `Deurvanger achterdeur kapot`,
+      cap_koplamp: `Lichte roestsporen onder koplamp`,
+      waarom_eyebrow: `Geen verborgen reden`,
+      waarom_h2: `Waarom te koop?`,
+      waarom_p1: `Deze bus heeft een tijd als mijn huis gediend. Ik heb er echt in geleefd, en dat zie je aan hoe compleet hij is ingericht. De eerste keer dat ik 'm meenam naar de kust was ik zielsgelukkig, en ik stond gewoon op een stuk asfalt. 's Avonds een gitaar in de hoek en een paar spotjes aan, of wildkamperen in de bergen van de Aosta met m'n vriendin; dat zijn de herinneringen die ik met deze bus heb gemaakt.`,
+      waarom_p2: `Inmiddels heb ik een vaste woonplek en is het financieel niet meer houdbaar om 'm aan te houden. Ik doe 'm met pijn in m'n hart weg, en gun 'm aan iemand die er net zulke plekken mee opzoekt: kamperen, op avontuur, of als huisje.`,
+      final_eyebrow: `Wil je deze zomer al op pad?`,
+      final_h2: `Plan je bezichtiging`,
+      final_p: `Tijdens een bezichtiging nemen we de tijd: ik laat alles zien, beantwoord je vragen en we maken een proefrit. Oprecht geïnteresseerd? Stuur dan een appje en we plannen een afspraak.`,
+      final_price: `<strong>Vraagprijs € 8.950</strong> <span style="color:#c8c2b1;font-size:.92rem">· redelijk bod bespreekbaar</span>`,
+      cta_wa: `App via WhatsApp`,
+      cta_call: `Bel 06 23191656`,
+      final_where: `📍 Bezichtigen in Amersfoort-zuid`,
+      footer: `Mercedes-Benz Sprinter 903.6 · 2002 · kenteken 82-RFZ-7 · particuliere verkoop`,
+      sticky_cta: `Plan een bezichtiging via WhatsApp`,
+      wa_msg: `Hoi Roel, ik zag je advertentie van de Mercedes Sprinter camper en wil graag langskomen om 'm te bekijken. Ik zoek een bus om mee weg te gaan.`
+    },
+    en: {
+      meta_title: `Mercedes Sprinter Camper · rebuilt engine · Victron solar · inspection until Feb '27`,
+      meta_desc: `Ready-to-go camouflage adventure van. Rebuilt engine, fresh inspection until Feb 2027, Victron off-grid, all invoices included. Asking price €8,950.`,
+      hero_eyebrow: `For sale · Mercedes Sprinter Camper · 2002`,
+      hero_h1: `Your home on wheels, ready for adventure`,
+      hero_price: `€8,950`,
+      hero_pricesub: `Backed by an appraisal (€10,000) and over €15,000 in invoices.`,
+      cta_plan: `Book a viewing`,
+      hero_seebus: `See the van`,
+      trust1: `<span class="ck">✓</span> No damage history`,
+      trust2: `<span class="ck">✓</span> Inspection until Feb '27`,
+      trust3: `<span class="ck">✓</span> All invoices included`,
+      story_eyebrow: `An evening in the van`,
+      story_h2: `Sleep wherever you like, at a campsite or out in the wild`,
+      story_p1: `Picture this: you're driving through the mountains and you reach a beautiful spot. This is where you want to spend the night. With this van you can: I've parked in the most beautiful places, far from any campsite. Throw the doors open, coffee on the gas burner, and soak up the view. That could be your life too!`,
+      story_p2: `A lot of love has gone into this van over the years. The engine block was rebuilt and <strong>over €15,000 in maintenance</strong> has gone in, with invoices. Fresh inspection and new all-terrain tyres (Toyo Open Country, chunky off-road tread). The brake lines were just replaced too.`,
+      vid_eyebrow: `Step inside`,
+      vid_h2: `Tour of the van`,
+      vid_cap: `Tip: turn the sound on 🔊`,
+      gal_eyebrow: `In pictures`,
+      gal_h2: `This is what you're buying`,
+      gal_p: `You won't miss that bold camouflage paint on any festival field. Click to enlarge.`,
+      cap_voorschuin: `Front three-quarter`,
+      cap_bed: `Bed, extends to a double`,
+      cap_zijaanzicht: `Side view, full camouflage`,
+      cap_keuken: `Kitchen: gas hob + sink`,
+      cap_voorschuinr: `Front three-quarter, right`,
+      cap_dashboard: `Dashboard + odometer`,
+      cap_camera: `Reversing camera in the mirror`,
+      cap_achter: `Rear with double doors + awning`,
+      cap_achterin: `Rear interior with the doors open`,
+      cap_opberg: `Roomy storage under the kitchen`,
+      cap_vertrek: `Ready to roll`,
+      cap_luifel: `Awning out, ready for the evening`,
+      cap_offgrid: `Off-grid in the forest`,
+      cap_bergen: `On the road in the mountains`,
+      leven_eyebrow: `How it really was`,
+      leven_h2: `On the road with this van`,
+      cap_koken: `Cooking with a view over the mountain meadow`,
+      cap_wild: `Wild camping in the mountains of Aosta`,
+      cap_stilstaan: `Pausing wherever it's beautiful`,
+      specs_eyebrow: `At a glance`,
+      specs_h2: `The specs`,
+      spec_tech_h: `🔧 Technical`,
+      dt_merk: `Make / model`,
+      dt_bouwjaar: `Year`,
+      dt_motor: `Engine`,
+      dd_motor: `2,148 cc · 95 kW / 129 hp`,
+      dt_brandstof: `Fuel`,
+      dt_transmissie: `Transmission`,
+      dd_transmissie: `Automatic · RWD`,
+      dt_km: `Mileage`,
+      dd_km: `367,718 km (Jun '26)`,
+      dt_verbruik: `Fuel use`,
+      dd_verbruik: `approx. 8.7 L/100 km`,
+      dt_apk: `Inspection (MOT)`,
+      dd_apk: `until 20-02-2027`,
+      dt_schade: `Damage history`,
+      dd_schade: `none (RDW)`,
+      dt_formaat: `Size`,
+      dt_cruise: `Cruise control`,
+      dd_cruise: `Retrofitted`,
+      spec_camper_h: `🏕️ Camper interior`,
+      li_bed: `Bed 200×80 cm; slatted base extends to a full double (two mattresses included)`,
+      li_stahoogte: `Standing height for 1.86 m+`,
+      li_keuken: `Kitchen: gas hob on a gas bottle (6.7 kg, '23, certified), fridge, water tank with 12V pump and tap`,
+      li_kachel: `VEVOR 8 kW diesel night heater with LCD, remote and app`,
+      li_dakraam: `Roof hatch, insect screens up front, 12V fan`,
+      li_camera: `Reversing camera with a monitor in the rear-view mirror (handy in a van this long)`,
+      li_luifel: `Awning to keep you dry in the rain or cool in strong sun`,
+      motor_eyebrow: `Hear it yourself`,
+      motor_h3: `A 24-year-old diesel? Have a listen.`,
+      motor_p: `The engine was rebuilt with a new block at around 335,000 km. The odometer now reads 367,718 km, some 33,000 km later.`,
+      motor_cap: `The word I was looking for was cruise control 😂`,
+      off_eyebrow: `Power on board`,
+      off_h2: `Off-grid on solar power with Victron`,
+      off_p: `A weekend of power without plugging in anywhere.`,
+      off1: `2× BlueSolar panel`,
+      off2: `SmartSolar 100/30 charge controller`,
+      off3: `leisure batteries + starter battery`,
+      off4: `inverter (Bluetooth) + shore power hookup (campsite or home)`,
+      maint_eyebrow: `What's gone into it`,
+      maint_h2: `Over €15,000 in maintenance, with invoices`,
+      badge1: `<span class="ck">✓</span> All invoices included`,
+      badge2: `<span class="ck">✓</span> Appraised at €10,000`,
+      badge3: `<span class="ck">✓</span> No damage history (RDW)`,
+      tl1_yr: `Rebuild (previous owner)`,
+      tl1_p: `Engine block rebuilt · new turbo, injectors, fuel lines, gearbox pump. Over €11,000 in total.`,
+      tl2_yr: `Aug 2024`,
+      tl2_p: `New alternator (ANWB).`,
+      tl3_yr: `Feb 2025`,
+      tl3_p: `Major service · new timing belt · high-pressure pump + lines.`,
+      tl4_yr: `Feb 2026 (certified garage)`,
+      tl4_p: `Major service + inspection · 2× new Toyo Open Country tyres · new brake lines · welding · all filters + brake fluid.`,
+      dos_eyebrow: `Fully documented`,
+      dos_h2: `You get the entire file`,
+      dos_p: `No nasty surprises. Everything comes with the van, digitally:`,
+      dos1: `All maintenance and repair invoices`,
+      dos2: `Appraisal report (replacement value €10,000)`,
+      dos3: `Full maintenance history`,
+      dos4: `Ready-made cost breakdown: measured fuel use + cost per km`,
+      dos_p2: `Clear and complete. If you'd like, I'll set up an assistant in your Claude or ChatGPT so you can ask it anything about the van.`,
+      hon_eyebrow: `No surprises`,
+      hon_h2: `Honest about the condition`,
+      hon_tag: `A real adventure van, not a showroom model`,
+      hon_p: `A 24-year-old van has a few small things. I'm listing them all so nothing catches you off guard:`,
+      hon1: `Water tap doesn't work (easy to replace yourself, ~€30)`,
+      hon2: `A few lighting details (number-plate LED, reflectors) still need fixing`,
+      hon3: `Driver's door lock occasionally doesn't catch first time (usually fine, a matter of adjustment)`,
+      hon4: `The catch (door retainer) on the right rear door is broken`,
+      hon5: `The large side window by the kitchen doesn't open`,
+      hon6: `The shore-power cable is short; a longer cable with plug is nicer (a few tens of euros)`,
+      hon7: `A bit of rust on the lower edges (including at the back) and a scratch by the driver's door`,
+      hon_note: `Nothing that gets in the way of driving or camping. <strong>Note:</strong> the engine is Euro 3, so it no longer enters the low-emission zones of major Dutch cities (Amsterdam, Utrecht and others; often with exemptions if you live there). For camping and travelling outside city centres it makes no difference.`,
+      cap_kras: `Scratch in the paint`,
+      cap_roest: `Rust on the rear lower edge`,
+      cap_deurvanger: `Rear-door retainer broken`,
+      cap_koplamp: `Light rust marks under a headlight`,
+      waarom_eyebrow: `No hidden reason`,
+      waarom_h2: `Why am I selling?`,
+      waarom_p1: `This van was my home for a while. I really lived in it, and you can tell from how completely it's kitted out. The first time I took it to the coast I was over the moon, and I was just parked on a patch of tarmac. A guitar in the corner in the evening and a couple of spotlights on, or wild camping in the mountains of Aosta with my girlfriend; those are the memories I made with this van.`,
+      waarom_p2: `I now have a permanent place to live and it's no longer financially viable to keep it. I'm letting it go with a heavy heart, and I'd love it to go to someone who'll seek out the same kind of places: camping, adventures, or as a little home.`,
+      final_eyebrow: `Want to hit the road this summer?`,
+      final_h2: `Book your viewing`,
+      final_p: `During a viewing we take our time: I'll show you everything, answer your questions and we'll go for a test drive. Genuinely interested? Send a message and we'll set up an appointment.`,
+      final_price: `<strong>Asking price €8,950</strong> <span style="color:#c8c2b1;font-size:.92rem">· reasonable offers welcome</span>`,
+      cta_wa: `Message on WhatsApp`,
+      cta_call: `Call +31 6 23191656`,
+      final_where: `📍 Viewings in Amersfoort-Zuid, NL`,
+      footer: `Mercedes-Benz Sprinter 903.6 · 2002 · plate 82-RFZ-7 · private sale`,
+      sticky_cta: `Book a viewing on WhatsApp`,
+      wa_msg: `Hi Roel, I saw your ad for the Mercedes Sprinter camper and I'd like to come and see it. I'm looking for a van to travel in.`
+    },
+    es: {
+      meta_title: `Mercedes Sprinter Camper · motor reconstruido · solar Victron · ITV hasta feb '27`,
+      meta_desc: `Camper de aventura en camuflaje, lista para salir. Motor reconstruido, ITV hasta feb 2027, sistema Victron off-grid, todas las facturas. Precio €8.950.`,
+      hero_eyebrow: `En venta · Mercedes Sprinter Camper · 2002`,
+      hero_h1: `Tu casa sobre ruedas, lista para la aventura`,
+      hero_price: `€8.950`,
+      hero_pricesub: `Respaldado por una tasación (€10.000) y más de €15.000 en facturas.`,
+      cta_plan: `Reserva una visita`,
+      hero_seebus: `Ver la camper`,
+      trust1: `<span class="ck">✓</span> Sin historial de daños`,
+      trust2: `<span class="ck">✓</span> ITV hasta feb '27`,
+      trust3: `<span class="ck">✓</span> Todas las facturas`,
+      story_eyebrow: `Una noche en la camper`,
+      story_h2: `Duerme donde quieras, en un camping o en plena naturaleza`,
+      story_p1: `Imagínate: conduces por la montaña y llegas a un sitio precioso. Aquí es donde quieres pasar la noche. Con esta camper puedes: he dormido en los lugares más bonitos, lejos de cualquier camping. Abres las puertas, café en el hornillo y a disfrutar de las vistas. ¡Esto también puede ser tu vida!`,
+      story_p2: `Estos años le he puesto mucho cariño a la camper. El bloque motor está reconstruido y se han invertido <strong>más de €15.000 en mantenimiento</strong>, con facturas. ITV reciente y neumáticos todoterreno nuevos (Toyo Open Country, dibujo off-road agresivo). Los latiguillos de freno también se acaban de cambiar.`,
+      vid_eyebrow: `Entra (virtualmente)`,
+      vid_h2: `Recorrido por la camper`,
+      vid_cap: `Consejo: pon el sonido 🔊`,
+      gal_eyebrow: `En imágenes`,
+      gal_h2: `Esto es lo que compras`,
+      gal_p: `Con esa pintura de camuflaje no pasarás desapercibido en ningún festival. Haz clic para ampliar.`,
+      cap_voorschuin: `Frontal en ángulo`,
+      cap_bed: `Cama, ampliable a doble`,
+      cap_zijaanzicht: `Vista lateral, camuflaje completo`,
+      cap_keuken: `Cocina: hornillo de gas + fregadero`,
+      cap_voorschuinr: `Frontal en ángulo, derecha`,
+      cap_dashboard: `Salpicadero + cuentakilómetros`,
+      cap_camera: `Cámara de marcha atrás en el espejo`,
+      cap_achter: `Trasera con puertas dobles + toldo`,
+      cap_achterin: `Interior trasero con las puertas abiertas`,
+      cap_opberg: `Amplio almacenaje bajo la cocina`,
+      cap_vertrek: `Lista para salir`,
+      cap_luifel: `Toldo desplegado, listo para la tarde`,
+      cap_offgrid: `Off-grid en el bosque`,
+      cap_bergen: `De ruta por la montaña`,
+      leven_eyebrow: `Cómo fue de verdad`,
+      leven_h2: `De viaje con esta camper`,
+      cap_koken: `Cocinando con vistas al prado de montaña`,
+      cap_wild: `Acampada libre en las montañas del Valle de Aosta`,
+      cap_stilstaan: `Una parada donde el paisaje lo merece`,
+      specs_eyebrow: `De un vistazo`,
+      specs_h2: `Las especificaciones`,
+      spec_tech_h: `🔧 Técnica`,
+      dt_merk: `Marca / modelo`,
+      dt_bouwjaar: `Año`,
+      dt_motor: `Motor`,
+      dd_motor: `2.148 cc · 95 kW / 129 CV`,
+      dt_brandstof: `Combustible`,
+      dt_transmissie: `Transmisión`,
+      dd_transmissie: `Automático · tracción trasera`,
+      dt_km: `Kilometraje`,
+      dd_km: `367.718 km (jun '26)`,
+      dt_verbruik: `Consumo`,
+      dd_verbruik: `aprox. 8,7 L/100 km`,
+      dt_apk: `ITV (APK NL)`,
+      dd_apk: `hasta 20-02-2027`,
+      dt_schade: `Historial de daños`,
+      dd_schade: `ninguno (RDW)`,
+      dt_formaat: `Tamaño`,
+      dt_cruise: `Control de crucero`,
+      dd_cruise: `Instalado posteriormente`,
+      spec_camper_h: `🏕️ Equipamiento camper`,
+      li_bed: `Cama 200×80 cm; somier extensible a doble completa (dos colchones incluidos)`,
+      li_stahoogte: `Altura para estar de pie hasta 1,86 m+`,
+      li_keuken: `Cocina: hornillo de gas con bombona (6,7 kg, '23, homologada), nevera, depósito de agua con bomba de 12V y grifo`,
+      li_kachel: `Calefacción estática diésel VEVOR de 8 kW con LCD, mando a distancia y app`,
+      li_dakraam: `Claraboya, mosquiteras delanteras, ventilador de 12V`,
+      li_camera: `Cámara de marcha atrás con monitor en el retrovisor (muy útil en una camper tan larga)`,
+      li_luifel: `Toldo que te mantiene seco con lluvia o fresco con sol fuerte`,
+      motor_eyebrow: `Escúchalo tú mismo`,
+      motor_h3: `¿Un diésel de 24 años? Escucha.`,
+      motor_p: `El motor se reconstruyó con un bloque nuevo sobre los 335.000 km. Ahora el cuentakilómetros marca 367.718 km, unos 33.000 km después.`,
+      motor_cap: `La palabra que buscaba era control de crucero 😂`,
+      off_eyebrow: `Energía a bordo`,
+      off_h2: `Off-grid con energía solar Victron`,
+      off_p: `Un fin de semana de energía sin enchufarte a nada.`,
+      off1: `2× panel BlueSolar`,
+      off2: `Regulador SmartSolar 100/30`,
+      off3: `baterías auxiliares + batería de arranque`,
+      off4: `inversor (Bluetooth) + toma de corriente externa (camping o casa)`,
+      maint_eyebrow: `Lo que se ha invertido`,
+      maint_h2: `Más de €15.000 en mantenimiento, con facturas`,
+      badge1: `<span class="ck">✓</span> Todas las facturas`,
+      badge2: `<span class="ck">✓</span> Tasada en €10.000`,
+      badge3: `<span class="ck">✓</span> Sin historial de daños (RDW)`,
+      tl1_yr: `Reconstrucción (anterior propietario)`,
+      tl1_p: `Bloque motor reconstruido · turbo nuevo, inyectores, líneas de combustible, bomba de la caja de cambios. Más de €11.000 en total.`,
+      tl2_yr: `Ago 2024`,
+      tl2_p: `Alternador nuevo (ANWB).`,
+      tl3_yr: `Feb 2025`,
+      tl3_p: `Revisión mayor · correa de distribución nueva · bomba de alta presión + líneas.`,
+      tl4_yr: `Feb 2026 (taller homologado)`,
+      tl4_p: `Revisión mayor + ITV · 2 neumáticos nuevos Toyo Open Country · latiguillos de freno nuevos · soldadura · todos los filtros + líquido de frenos.`,
+      dos_eyebrow: `Totalmente documentada`,
+      dos_h2: `Te llevas todo el dossier`,
+      dos_p: `Sin sorpresas. Todo se entrega con la camper, en digital:`,
+      dos1: `Todas las facturas de mantenimiento y reparación`,
+      dos2: `Informe de tasación (valor de reposición €10.000)`,
+      dos3: `Historial de mantenimiento completo`,
+      dos4: `Cálculo de costes listo: consumo medido + coste por km`,
+      dos_p2: `Claro y completo. Si quieres, te preparo un asistente en tu Claude o ChatGPT para que puedas preguntarle todo sobre la camper.`,
+      hon_eyebrow: `Sin sorpresas`,
+      hon_h2: `Sincero sobre el estado`,
+      hon_tag: `Una auténtica camper de aventura, no un modelo de exposición`,
+      hon_p: `Una camper de 24 años tiene algún detalle. Los menciono todos para que no te lleves sorpresas:`,
+      hon1: `El grifo del agua no funciona (fácil de cambiar uno mismo, ~€30)`,
+      hon2: `Algunos detalles de iluminación (LED de matrícula, reflectores) por arreglar`,
+      hon3: `La cerradura de la puerta del conductor a veces no cierra a la primera (casi siempre bien, cuestión de ajuste)`,
+      hon4: `El retenedor de la puerta trasera derecha está roto`,
+      hon5: `La ventana lateral grande de la cocina no abre`,
+      hon6: `El cable de corriente externa es corto; uno más largo con enchufe va mejor (unas pocas decenas de euros)`,
+      hon7: `Algo de óxido en los bajos (también detrás) y un arañazo junto a la puerta del conductor`,
+      hon_note: `Nada que impida conducir o acampar. <strong>Nota:</strong> el motor es Euro 3, así que ya no entra en las zonas de bajas emisiones de las grandes ciudades holandesas (Ámsterdam, Utrecht y otras; a menudo con excepciones si resides allí). Para acampar y viajar fuera de los centros urbanos no afecta en nada.`,
+      cap_kras: `Arañazo en la pintura`,
+      cap_roest: `Óxido en el bajo trasero`,
+      cap_deurvanger: `Retenedor de la puerta trasera roto`,
+      cap_koplamp: `Ligeras marcas de óxido bajo un faro`,
+      waarom_eyebrow: `Sin motivos ocultos`,
+      waarom_h2: `¿Por qué la vendo?`,
+      waarom_p1: `Esta camper fue mi casa durante un tiempo. Viví de verdad en ella, y se nota en lo completa que está equipada. La primera vez que la llevé a la costa estaba feliz de la vida, y simplemente estaba aparcado en un trozo de asfalto. Una guitarra en un rincón por la noche y un par de focos encendidos, o acampada libre en las montañas del Valle de Aosta con mi pareja; esos son los recuerdos que he hecho con esta camper.`,
+      waarom_p2: `Ahora tengo un lugar fijo donde vivir y ya no me resulta viable mantenerla. La dejo ir con el corazón en un puño, y me gustaría que fuera a alguien que busque ese mismo tipo de sitios: acampar, aventuras, o como pequeña casa.`,
+      final_eyebrow: `¿Quieres salir a la carretera este verano?`,
+      final_h2: `Reserva tu visita`,
+      final_p: `Durante la visita nos lo tomamos con calma: te enseño todo, respondo tus preguntas y damos una vuelta de prueba. ¿Interés real? Escríbeme y concertamos una cita.`,
+      final_price: `<strong>Precio €8.950</strong> <span style="color:#c8c2b1;font-size:.92rem">· se admite una oferta razonable</span>`,
+      cta_wa: `Escribe por WhatsApp`,
+      cta_call: `Llama al +31 6 23191656`,
+      final_where: `📍 Visitas en Amersfoort-Zuid (NL)`,
+      footer: `Mercedes-Benz Sprinter 903.6 · 2002 · matrícula 82-RFZ-7 · venta particular`,
+      sticky_cta: `Reserva una visita por WhatsApp`,
+      wa_msg: `Hola Roel, he visto tu anuncio de la camper Mercedes Sprinter y me gustaría ir a verla. Busco una camper para viajar.`
+    }
+  };
+
+  /* ---------- Toepassen van een taal ---------- */
+  var WA_BASE = 'https://wa.me/31623191656';
+  var LANGS = { nl:'NL', en:'EN', es:'ES' };
+
+  function applyLang(lang){
+    if(!I18N[lang]) lang = 'nl';
+    var d = I18N[lang];
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(d[k] != null) el.textContent = d[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-html');
+      if(d[k] != null) el.innerHTML = d[k];
+    });
+
+    if(d.meta_title) document.title = d.meta_title;
+    var md = document.querySelector('meta[name="description"]');
+    if(md && d.meta_desc) md.setAttribute('content', d.meta_desc);
+
+    // WhatsApp-knoppen met vertaald bericht
+    var waHref = WA_BASE + '?text=' + encodeURIComponent(d.wa_msg);
+    document.querySelectorAll('a.btn-wa').forEach(function(a){ a.href = waHref; });
+
+    // huidige taal in de knop + actieve markering
+    var cur = document.getElementById('langCurrent');
+    if(cur) cur.textContent = LANGS[lang] || lang.toUpperCase();
+    document.querySelectorAll('.lang-switch .menu button').forEach(function(b){
+      b.setAttribute('aria-current', b.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+
+    try { localStorage.setItem('lang', lang); } catch(e){}
+  }
+
+  /* ---------- Beginnen met de juiste taal ---------- */
+  (function initLang(){
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch(e){}
+    var lang = saved;
+    if(!lang){
+      var nav = (navigator.language || 'nl').slice(0,2).toLowerCase();
+      lang = (nav === 'en' || nav === 'es') ? nav : 'nl';
+    }
+    applyLang(lang);
+  })();
+
+  /* ---------- Taalmenu openen/sluiten ---------- */
+  (function(){
+    var sw = document.getElementById('langSwitch');
+    var toggle = document.getElementById('langToggle');
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = sw.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    sw.querySelectorAll('.menu button').forEach(function(b){
+      b.addEventListener('click', function(){
+        applyLang(b.getAttribute('data-lang'));
+        sw.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.addEventListener('click', function(e){
+      if(!sw.contains(e.target)) sw.classList.remove('open');
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') sw.classList.remove('open');
+    });
+  })();
+
+  /* ---------- Lightbox ---------- */
   (function(){
     var lb=document.getElementById('lb'), lbImg=lb.querySelector('img');
     document.querySelectorAll('.gallery figure img, .staat-shots figure img, .leven figure img').forEach(function(img){
